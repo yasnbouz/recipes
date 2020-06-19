@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MainLayout from 'components/MainLayout';
+import MainLayout from 'components/layout/MainLayout';
 const StyledText = styled.h1`
     color: red;
 `;

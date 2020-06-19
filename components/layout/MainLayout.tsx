@@ -3,12 +3,19 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'utils/theme';
 import GlobalStyle from 'utils/globalStyle';
 import Head from 'next/head';
-
+import { Layout } from 'antd';
+import MainFooter from './MainFooter';
+import styled from 'styled-components';
+const { Content } = Layout;
 type Props = {
     children: ReactNode;
     title?: string;
 };
-
+const StyledBody = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+`;
 const MainHead = ({ title }: { title: string }) => (
     <Head>
         {/* <!-- Primary Meta Tags --> */}
@@ -48,7 +55,12 @@ const MainLayout = ({ children, title = '' }: Props) => {
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <MainHead title={title} />
-            {children}
+            <StyledBody>
+                <Layout>
+                    <Content> {children}</Content>
+                    <MainFooter />
+                </Layout>
+            </StyledBody>
         </ThemeProvider>
     );
 };
