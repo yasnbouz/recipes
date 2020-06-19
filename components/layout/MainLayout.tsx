@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { Layout } from 'antd';
 import MainFooter from './MainFooter';
 import styled from 'styled-components';
+import MainNavBar from './MainNavBar';
 const { Content } = Layout;
 type Props = {
     children: ReactNode;
@@ -57,6 +58,7 @@ const MainLayout = ({ children, title = '' }: Props) => {
             <MainHead title={title} />
             <StyledBody>
                 <Layout>
+                    <MainNavBar />
                     <Content> {children}</Content>
                     <MainFooter />
                 </Layout>

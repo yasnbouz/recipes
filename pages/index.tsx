@@ -7,7 +7,7 @@ const StyledText = styled.h1`
 const Home = () => {
     return (
         <MainLayout title="Recipes">
-            <StyledText>haha</StyledText>;
+            <StyledText>hello</StyledText>;
         </MainLayout>
     );
 };
