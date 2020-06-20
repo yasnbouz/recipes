@@ -1,14 +1,15 @@
-import styled from 'styled-components';
+import { useQuery } from '@apollo/react-hooks';
+import { recipesGraphQL } from 'graphql/queries/recipes';
 import MainLayout from 'components/layout/MainLayout';
-const StyledText = styled.h1`
-    color: red;
-`;
 
 const Home = () => {
+    const { data, loading } = useQuery(recipesGraphQL);
+    if (loading) return <p>loading...</p>;
     return (
         <MainLayout title="Recipes">
-            <StyledText>hello</StyledText>;
+            <p>{data.recipes[0].title}</p>
         </MainLayout>
     );
 };
+
 export default Home;

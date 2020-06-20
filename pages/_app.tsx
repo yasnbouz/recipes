@@ -1,9 +1,12 @@
-import App from 'next/app';
 import 'antd/dist/antd.css';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { useApollo } from '../lib/apolloClient';
+export default function App({ Component, pageProps }) {
+    const apolloClient = useApollo(pageProps.initialApolloState);
 
-export default class MyApp extends App {
-    render() {
-        const { Component, pageProps } = this.props;
-        return <Component {...pageProps} />;
-    }
+    return (
+        <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+        </ApolloProvider>
+    );
 }
