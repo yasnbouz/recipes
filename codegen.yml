@@ -1,0 +1,15 @@
+overwrite: true
+schema: ${GRAPHCMS_PROJECT_API}
+documents: 'graphql/**/*.ts'
+generates:
+    generated/apollo-components.tsx:
+        plugins:
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-react-apollo'
+        config:
+            withHooks: true
+        hooks:
+            afterOneFileWrite:
+                - eslint --fix
+                - prettier --write

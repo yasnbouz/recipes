@@ -1,12 +1,12 @@
-import { useQuery } from '@apollo/react-hooks';
-import { recipesGraphQL } from 'graphql/queries/recipes';
 import MainLayout from 'components/layout/MainLayout';
+import { useRecipesGraphQlQuery } from 'generated/apollo-components';
 
 const Home = () => {
-    const { data, loading } = useQuery(recipesGraphQL);
+    const { data, loading } = useRecipesGraphQlQuery();
     if (loading) return <p>loading...</p>;
     return (
         <MainLayout title="Recipes">
+            hello
             <p>{data.recipes[0].title}</p>
         </MainLayout>
     );

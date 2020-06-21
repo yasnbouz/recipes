@@ -31,5 +31,12 @@ module.exports = {
                 aspects: ['invalidHref', 'preferButton'],
             },
         ],
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-types': 'off',
+    },
+    settings: {
+        react: {
+            version: 'detect',
+        },
     },
 };

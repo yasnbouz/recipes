@@ -4,7 +4,7 @@ export const updateRecipeGraphQL = gql`
     mutation updateRecipeGraphQL($data: RecipeUpdateInput!, $where: RecipeWhereUniqueInput!) {
         updateRecipe(data: $data, where: $where) {
             id
-            status
+            status_
             title
             content
             description

@@ -3,10 +3,16 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
+import getConfig from 'next/config';
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig();
+const { GRAPHCMS_PROJECT_API } = publicRuntimeConfig;
+
 let apolloClient;
 
 const httpLink = createHttpLink({
-    uri: process.env.NEXT_PUBLIC_GRAPHCMS_PROJECT_API, // Server URL (must be absolute)
+    uri: GRAPHCMS_PROJECT_API, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 const authLink = setContext((_, { headers }) => {

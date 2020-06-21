@@ -7,7 +7,7 @@ export const userLikesGraphQL = gql`
             user
             recipe {
                 id
-                status
+                status_
                 title
                 content
                 description
