@@ -4,6 +4,9 @@ import { userLikesGraphQL } from 'graphql/queries/userLikes';
 import { get, map } from 'lodash';
 import { Row, Col } from 'antd';
 import { Recipe } from 'generated/apollo-components';
+import Error from './notify/Error';
+import Loading from './notify/Loading';
+import Warning from './notify/Warning';
 export enum queryEnum {
     userLikes = 'userLikes',
     recipes = 'recipes',
@@ -20,16 +23,16 @@ export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps)
     const { data, loading, error } = useQuery(query, options);
     const parentArray = get(data, queryType);
     const recipesList = map(parentArray, (value) => get(value, 'recipe', value));
-    if (loading) return <p>loading...</p>;
-    if (error || !recipesList) return <p>Error:{error}</p>;
-    if (recipesList.length === 0) return <p>No Recipes</p>;
+    if (loading) return <Loading />;
+    if (error || !recipesList) return <Error errorText={`${error}`} />;
+    if (recipesList.length === 0) return <Warning warnHeader="No Recipes" warnText="No recipes are present, why not add one?" />;
     return (
         <Row gutter={[16, 16]}>
-            <Col span={8}>
-                {recipesList.map((recipe: Recipe) => (
+            {recipesList.map((recipe: Recipe) => (
+                <Col key={recipe.id} span={8}>
                     <pre key={recipe.id}>{JSON.stringify(recipe, null, 4)}</pre>
-                ))}
-            </Col>
+                </Col>
+            ))}
         </Row>
     );
 };

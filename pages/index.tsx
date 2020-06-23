@@ -4,7 +4,7 @@ import { RecipeList, queryEnum } from 'components/RecipeList';
 const Home = () => {
     return (
         <MainLayout title="Recipes">
-            <RecipeList parentRoute="recipe" queryType={queryEnum.userLikes} />
+            <RecipeList parentRoute="recipe" queryType={queryEnum.recipes} />
         </MainLayout>
     );
 };
