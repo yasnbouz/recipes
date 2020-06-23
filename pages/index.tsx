@@ -1,13 +1,10 @@
 import MainLayout from 'components/layout/MainLayout';
-import { useRecipesGraphQlQuery } from 'generated/apollo-components';
+import { RecipeList, queryEnum } from 'components/RecipeList';
 
 const Home = () => {
-    const { data, loading } = useRecipesGraphQlQuery();
-    if (loading) return <p>loading...</p>;
     return (
         <MainLayout title="Recipes">
-            hello
-            <p>{data.recipes[0].title}</p>
+            <RecipeList parentRoute="recipe" queryType={queryEnum.userLikes} />
         </MainLayout>
     );
 };
