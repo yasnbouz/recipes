@@ -2,11 +2,12 @@ import { QueryHookOptions, useQuery } from '@apollo/react-hooks';
 import { recipesGraphQL } from 'graphql/queries/recipes';
 import { userLikesGraphQL } from 'graphql/queries/userLikes';
 import { get, map } from 'lodash';
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 import { Recipe } from 'generated/apollo-components';
 import Error from './notify/Error';
 import Loading from './notify/Loading';
 import Warning from './notify/Warning';
+import RecipeListItem from './RecipeListItem';
 export enum queryEnum {
     userLikes = 'userLikes',
     recipes = 'recipes',
@@ -27,11 +28,9 @@ export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps)
     if (error || !recipesList) return <Error errorText={`${error}`} />;
     if (recipesList.length === 0) return <Warning warnHeader="No Recipes" warnText="No recipes are present, why not add one?" />;
     return (
-        <Row gutter={[16, 16]}>
+        <Row gutter={16} style={{ margin: 'auto' }}>
             {recipesList.map((recipe: Recipe) => (
-                <Col key={recipe.id} span={8}>
-                    <pre key={recipe.id}>{JSON.stringify(recipe, null, 4)}</pre>
-                </Col>
+                <RecipeListItem key={`${recipe.id}-${queryType}`} recipe={recipe} parentRoute={parentRoute} />
             ))}
         </Row>
     );
