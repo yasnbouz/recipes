@@ -25,3 +25,10 @@ export const recipesGraphQL = gql`
         }
     }
 `;
+export const recipesIDsGraphQL = gql`
+    {
+        recipes {
+            id
+        }
+    }
+`;
