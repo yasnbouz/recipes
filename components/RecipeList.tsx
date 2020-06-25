@@ -1,9 +1,7 @@
-import { QueryHookOptions, useQuery } from '@apollo/react-hooks';
-import { recipesGraphQL } from 'graphql/queries/recipes';
-import { userLikesGraphQL } from 'graphql/queries/userLikes';
+import { QueryHookOptions } from '@apollo/react-hooks';
+import { Recipe, useRecipesGraphQlQuery, useUserLikesGraphQlQuery } from 'generated/apollo-components';
 import { get, map } from 'lodash';
 import { Row } from 'antd';
-import { Recipe } from 'generated/apollo-components';
 import Error from './notify/Error';
 import Loading from './notify/Loading';
 import Warning from './notify/Warning';
@@ -20,8 +18,7 @@ type RecipeListProps = {
 };
 
 export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps) => {
-    const query = queryType === queryEnum.recipes ? recipesGraphQL : userLikesGraphQL;
-    const { data, loading, error } = useQuery(query, options);
+    const { data, loading, error } = queryType === queryEnum.recipes ? useRecipesGraphQlQuery(options) : useUserLikesGraphQlQuery(options);
     const parentArray = get(data, queryType);
     const recipesList = map(parentArray, (value) => get(value, 'recipe', value));
     if (loading) return <Loading />;
