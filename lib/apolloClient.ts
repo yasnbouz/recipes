@@ -3,27 +3,23 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
-import getConfig from 'next/config';
-
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-const { publicRuntimeConfig } = getConfig();
-const { GRAPHCMS_PROJECT_API } = publicRuntimeConfig;
 
 let apolloClient;
 
+const { NEXT_PUBLIC_GRAPHCMS_PROJECT_API } = process.env;
 const httpLink = createHttpLink({
-    uri: GRAPHCMS_PROJECT_API, // Server URL (must be absolute)
+    uri: NEXT_PUBLIC_GRAPHCMS_PROJECT_API, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     // return the headers to the context so httpLink can read them
     return {
-        headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : '',
-        },
+        // headers: {
+        //     ...headers,
+        //     authorization: token ? `Bearer ${token}` : '',
+        // },
     };
 });
 function createApolloClient() {
