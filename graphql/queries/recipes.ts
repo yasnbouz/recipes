@@ -26,7 +26,7 @@ export const recipesGraphQL = gql`
     }
 `;
 export const recipesIDsGraphQL = gql`
-    {
+    query recipesIDsGraphQL {
         recipes {
             id
         }
