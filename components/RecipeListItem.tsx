@@ -15,7 +15,7 @@ const StyledRecipe = styled(Col)`
             border-radius:5px;
             transition:box-shadow .3s ease;
             &:hover{
-                box-shadow:0 0 16px ${theme['border_color']};
+                box-shadow:0px 0px 6px 4px rgba(0,0,0,0.1);
             }
             .graphcms-image-outer-wrapper{
                 cursor:pointer;
@@ -39,7 +39,7 @@ export default function RecipeListItem({ recipe, parentRoute }: { recipe: Recipe
     return (
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <div className="card">
-                <Link href={`/${parentRoute}/${recipe.id}`} passHref>
+                <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`} passHref>
                     <div>{images ? <GraphImg image={images[0]} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
