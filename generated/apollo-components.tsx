@@ -14,223 +14,19 @@ export type Scalars = {
     Boolean: boolean;
     Int: number;
     Float: number;
-    /** Raw JSON value */
-    Json: any;
-    /** Slate-compatible RichText AST */
-    RichTextAST: any;
     Hex: any;
-    /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representationof dates and times using the Gregorian calendar. */
-    DateTime: any;
+    RGBAHue: any;
     /** A date string, such as 2007-12-03 (YYYY-MM-DD), compliant with ISO 8601 standard for representation of dates using the Gregorian calendar. */
     Date: any;
-    RGBAHue: any;
     RGBATransparency: any;
+    /** Raw JSON value */
+    Json: any;
+    /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representationof dates and times using the Gregorian calendar. */
+    DateTime: any;
     /** The Long scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1. */
     Long: any;
-};
-
-export type ConnectPositionInput = {
-    /** Connect document after specified document */
-    after?: Maybe<Scalars['ID']>;
-    /** Connect document before specified document */
-    before?: Maybe<Scalars['ID']>;
-    /** Connect document at first position */
-    start?: Maybe<Scalars['Boolean']>;
-    /** Connect document at last position */
-    end?: Maybe<Scalars['Boolean']>;
-};
-
-/** Transformations for Assets */
-export type AssetTransformationInput = {
-    image?: Maybe<ImageTransformationInput>;
-    document?: Maybe<DocumentTransformationInput>;
-    /** Pass true if you want to validate the passed transformation parameters */
-    validateOptions?: Maybe<Scalars['Boolean']>;
-};
-
-/** An edge in a connection. */
-export type AssetEdge = {
-    __typename?: 'AssetEdge';
-    /** The item at the end of the edge. */
-    node: Asset;
-    /** A cursor for use in pagination. */
-    cursor: Scalars['String'];
-};
-
-export type RecipeConnectInput = {
-    /** Document to connect */
-    where: RecipeWhereUniqueInput;
-    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-    position?: Maybe<ConnectPositionInput>;
-};
-
-export type RecipeUpdateOneInlineInput = {
-    /** Create and connect one Recipe document */
-    create?: Maybe<RecipeCreateInput>;
-    /** Update single Recipe document */
-    update?: Maybe<RecipeUpdateWithNestedWhereUniqueInput>;
-    /** Upsert single Recipe document */
-    upsert?: Maybe<RecipeUpsertWithNestedWhereUniqueInput>;
-    /** Connect existing Recipe document */
-    connect?: Maybe<RecipeWhereUniqueInput>;
-    /** Disconnect currently connected Recipe document */
-    disconnect?: Maybe<Scalars['Boolean']>;
-    /** Delete currently connected Recipe document */
-    delete?: Maybe<Scalars['Boolean']>;
-};
-
-/** A connection to a list of items. */
-export type UserLikeConnection = {
-    __typename?: 'UserLikeConnection';
-    /** Information to aid in pagination. */
-    pageInfo: PageInfo;
-    /** A list of edges. */
-    edges: Array<UserLikeEdge>;
-    aggregate: Aggregate;
-};
-
-export type AssetCreateOneInlineInput = {
-    /** Create and connect one Asset document */
-    create?: Maybe<AssetCreateInput>;
-    /** Connect one existing Asset document */
-    connect?: Maybe<AssetWhereUniqueInput>;
-};
-
-export type Aggregate = {
-    __typename?: 'Aggregate';
-    count: Scalars['Int'];
-};
-
-export type AssetUpsertLocalizationInput = {
-    update: AssetUpdateLocalizationDataInput;
-    create: AssetCreateLocalizationDataInput;
-    locale: Locale;
-};
-
-export enum _RelationInputKind {
-    Create = 'create',
-    Update = 'update',
-}
-
-export type AssetCreateLocalizationsInput = {
-    /** Create localizations for the newly-created document */
-    create?: Maybe<Array<AssetCreateLocalizationInput>>;
-};
-
-export type AssetUpsertInput = {
-    /** Create document if it didn't exist */
-    create: AssetCreateInput;
-    /** Update document if it exists */
-    update: AssetUpdateInput;
-};
-
-export type UserLikeCreateManyInlineInput = {
-    /** Create and connect multiple existing UserLike documents */
-    create?: Maybe<Array<UserLikeCreateInput>>;
-    /** Connect multiple existing UserLike documents */
-    connect?: Maybe<Array<UserLikeWhereUniqueInput>>;
-};
-
-export enum _MutationInputFieldKind {
-    Scalar = 'scalar',
-    RichText = 'richText',
-    Enum = 'enum',
-    Relation = 'relation',
-    Union = 'union',
-    Virtual = 'virtual',
-}
-
-export type UserLikeUpdateManyInlineInput = {
-    /** Create and connect multiple UserLike documents */
-    create?: Maybe<Array<UserLikeCreateInput>>;
-    /** Connect multiple existing UserLike documents */
-    connect?: Maybe<Array<UserLikeConnectInput>>;
-    /** Override currently-connected documents with multiple existing UserLike documents */
-    set?: Maybe<Array<UserLikeWhereUniqueInput>>;
-    /** Update multiple UserLike documents */
-    update?: Maybe<Array<UserLikeUpdateWithNestedWhereUniqueInput>>;
-    /** Upsert multiple UserLike documents */
-    upsert?: Maybe<Array<UserLikeUpsertWithNestedWhereUniqueInput>>;
-    /** Disconnect multiple UserLike documents */
-    disconnect?: Maybe<Array<UserLikeWhereUniqueInput>>;
-    /** Delete multiple UserLike documents */
-    delete?: Maybe<Array<UserLikeWhereUniqueInput>>;
-};
-
-/** References Recipe record uniquely */
-export type RecipeWhereUniqueInput = {
-    id?: Maybe<Scalars['ID']>;
-};
-
-export type UserLikeUpdateInput = {
-    user?: Maybe<Scalars['String']>;
-    recipe?: Maybe<RecipeUpdateOneInlineInput>;
-};
-
-export type UserLikeUpdateManyInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    user?: Maybe<Scalars['String']>;
-};
-
-export type AssetUpdateWithNestedWhereUniqueInput = {
-    /** Unique document search */
-    where: AssetWhereUniqueInput;
-    /** Document to update */
-    data: AssetUpdateInput;
-};
-
-export enum UserLikeOrderByInput {
-    IdAsc = 'id_ASC',
-    IdDesc = 'id_DESC',
-    CreatedAtAsc = 'createdAt_ASC',
-    CreatedAtDesc = 'createdAt_DESC',
-    UpdatedAtAsc = 'updatedAt_ASC',
-    UpdatedAtDesc = 'updatedAt_DESC',
-    PublishedAtAsc = 'publishedAt_ASC',
-    PublishedAtDesc = 'publishedAt_DESC',
-    UserAsc = 'user_ASC',
-    UserDesc = 'user_DESC',
-}
-
-export type UserLikeConnectInput = {
-    /** Document to connect */
-    where: UserLikeWhereUniqueInput;
-    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-    position?: Maybe<ConnectPositionInput>;
-};
-
-export type UserLikeUpsertWithNestedWhereUniqueInput = {
-    /** Unique document search */
-    where: UserLikeWhereUniqueInput;
-    /** Upsert data */
-    data: UserLikeUpsertInput;
-};
-
-export type UserLikeUpdateManyWithNestedWhereInput = {
-    /** Document search */
-    where: UserLikeWhereInput;
-    /** Update many input */
-    data: UserLikeUpdateManyInput;
-};
-
-export type AssetCreateManyInlineInput = {
-    /** Create and connect multiple existing Asset documents */
-    create?: Maybe<Array<AssetCreateInput>>;
-    /** Connect multiple existing Asset documents */
-    connect?: Maybe<Array<AssetWhereUniqueInput>>;
-};
-
-export type AssetUpdateInput = {
-    handle?: Maybe<Scalars['String']>;
-    fileName?: Maybe<Scalars['String']>;
-    height?: Maybe<Scalars['Float']>;
-    width?: Maybe<Scalars['Float']>;
-    size?: Maybe<Scalars['Float']>;
-    mimeType?: Maybe<Scalars['String']>;
-    recipeImages?: Maybe<RecipeUpdateManyInlineInput>;
-    /** Manage document localizations */
-    localizations?: Maybe<AssetUpdateLocalizationsInput>;
+    /** Slate-compatible RichText AST */
+    RichTextAST: any;
 };
 
 export type RecipeUpsertInput = {
@@ -240,608 +36,6 @@ export type RecipeUpsertInput = {
     update: RecipeUpdateInput;
 };
 
-export enum _MutationKind {
-    Create = 'create',
-    Publish = 'publish',
-    Unpublish = 'unpublish',
-    Update = 'update',
-    Upsert = 'upsert',
-    Delete = 'delete',
-    UpdateMany = 'updateMany',
-    PublishMany = 'publishMany',
-    UnpublishMany = 'unpublishMany',
-    DeleteMany = 'deleteMany',
-}
-
-/** Transformations for Images */
-export type ImageTransformationInput = {
-    /** Resizes the image */
-    resize?: Maybe<ImageResizeInput>;
-};
-
-export type RecipeUpdateManyInlineInput = {
-    /** Create and connect multiple Recipe documents */
-    create?: Maybe<Array<RecipeCreateInput>>;
-    /** Connect multiple existing Recipe documents */
-    connect?: Maybe<Array<RecipeConnectInput>>;
-    /** Override currently-connected documents with multiple existing Recipe documents */
-    set?: Maybe<Array<RecipeWhereUniqueInput>>;
-    /** Update multiple Recipe documents */
-    update?: Maybe<Array<RecipeUpdateWithNestedWhereUniqueInput>>;
-    /** Upsert multiple Recipe documents */
-    upsert?: Maybe<Array<RecipeUpsertWithNestedWhereUniqueInput>>;
-    /** Disconnect multiple Recipe documents */
-    disconnect?: Maybe<Array<RecipeWhereUniqueInput>>;
-    /** Delete multiple Recipe documents */
-    delete?: Maybe<Array<RecipeWhereUniqueInput>>;
-};
-
-export enum _OrderDirection {
-    Asc = 'asc',
-    Desc = 'desc',
-}
-
-/** An object with an ID */
-export type Node = {
-    /** The id of the object. */
-    id: Scalars['ID'];
-    /** The Stage of an object */
-    stage: Stage;
-};
-
-export type AssetCreateInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    handle: Scalars['String'];
-    fileName: Scalars['String'];
-    height?: Maybe<Scalars['Float']>;
-    width?: Maybe<Scalars['Float']>;
-    size?: Maybe<Scalars['Float']>;
-    mimeType?: Maybe<Scalars['String']>;
-    recipeImages?: Maybe<RecipeCreateManyInlineInput>;
-    /** Inline mutations for managing document localizations excluding the default locale */
-    localizations?: Maybe<AssetCreateLocalizationsInput>;
-};
-
-export type AssetUpdateLocalizationInput = {
-    data: AssetUpdateLocalizationDataInput;
-    locale: Locale;
-};
-
-export type AssetUpdateManyInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    /** Optional updates to localizations */
-    localizations?: Maybe<Array<AssetUpdateManyLocalizationInput>>;
-};
-
-export type RecipeUpdateManyWithNestedWhereInput = {
-    /** Document search */
-    where: RecipeWhereInput;
-    /** Update many input */
-    data: RecipeUpdateManyInput;
-};
-
-export enum SystemDateTimeFieldVariation {
-    Base = 'BASE',
-    Localization = 'LOCALIZATION',
-    Combined = 'COMBINED',
-}
-
-export type DocumentOutputInput = {
-    /**
-     * Transforms a document into a desired file type.
-     * See this matrix for format support:
-     *
-     * PDF:	jpg, odp, ods, odt, png, svg, txt, and webp
-     * DOC:	docx, html, jpg, odt, pdf, png, svg, txt, and webp
-     * DOCX:	doc, html, jpg, odt, pdf, png, svg, txt, and webp
-     * ODT:	doc, docx, html, jpg, pdf, png, svg, txt, and webp
-     * XLS:	jpg, pdf, ods, png, svg, xlsx, and webp
-     * XLSX:	jpg, pdf, ods, png, svg, xls, and webp
-     * ODS:	jpg, pdf, png, xls, svg, xlsx, and webp
-     * PPT:	jpg, odp, pdf, png, svg, pptx, and webp
-     * PPTX:	jpg, odp, pdf, png, svg, ppt, and webp
-     * ODP:	jpg, pdf, png, ppt, svg, pptx, and webp
-     * BMP:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * GIF:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * JPG:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * PNG:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * WEBP:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * TIFF:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * AI:	    jpg, odp, ods, odt, pdf, png, svg, and webp
-     * PSD:	jpg, odp, ods, odt, pdf, png, svg, and webp
-     * SVG:	jpg, odp, ods, odt, pdf, png, and webp
-     * HTML:	jpg, odt, pdf, svg, txt, and webp
-     * TXT:	jpg, html, odt, pdf, svg, and webp
-     */
-    format?: Maybe<DocumentFileTypes>;
-};
-
-export type RecipeCreateOneInlineInput = {
-    /** Create and connect one Recipe document */
-    create?: Maybe<RecipeCreateInput>;
-    /** Connect one existing Recipe document */
-    connect?: Maybe<RecipeWhereUniqueInput>;
-};
-
-export enum _RelationKind {
-    Regular = 'regular',
-    Union = 'union',
-}
-
-export type Version = {
-    __typename?: 'Version';
-    id: Scalars['ID'];
-    stage: Stage;
-    revision: Scalars['Int'];
-    createdAt: Scalars['DateTime'];
-};
-
-/** Identifies documents */
-export type AssetManyWhereInput = {
-    /** Contains search across all appropriate fields. */
-    _search?: Maybe<Scalars['String']>;
-    /** Logical AND on all given filters. */
-    AND?: Maybe<Array<AssetWhereInput>>;
-    /** Logical OR on all given filters. */
-    OR?: Maybe<Array<AssetWhereInput>>;
-    /** Logical NOT on all given filters combined by AND. */
-    NOT?: Maybe<Array<AssetWhereInput>>;
-    id?: Maybe<Scalars['ID']>;
-    /** All values that are not equal to given value. */
-    id_not?: Maybe<Scalars['ID']>;
-    /** All values that are contained in given list. */
-    id_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values that are not contained in given list. */
-    id_not_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values containing the given string. */
-    id_contains?: Maybe<Scalars['ID']>;
-    /** All values not containing the given string. */
-    id_not_contains?: Maybe<Scalars['ID']>;
-    /** All values starting with the given string. */
-    id_starts_with?: Maybe<Scalars['ID']>;
-    /** All values not starting with the given string. */
-    id_not_starts_with?: Maybe<Scalars['ID']>;
-    /** All values ending with the given string. */
-    id_ends_with?: Maybe<Scalars['ID']>;
-    /** All values not ending with the given string */
-    id_not_ends_with?: Maybe<Scalars['ID']>;
-    createdAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    createdAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    createdAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    createdAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    createdAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    createdAt_gte?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    updatedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    updatedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    updatedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    updatedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    updatedAt_gte?: Maybe<Scalars['DateTime']>;
-    publishedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    publishedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    publishedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    publishedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    publishedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    publishedAt_gte?: Maybe<Scalars['DateTime']>;
-    recipeImages_every?: Maybe<RecipeWhereInput>;
-    recipeImages_some?: Maybe<RecipeWhereInput>;
-    recipeImages_none?: Maybe<RecipeWhereInput>;
-};
-
-export type AssetUpdateLocalizationsInput = {
-    /** Localizations to create */
-    create?: Maybe<Array<AssetCreateLocalizationInput>>;
-    /** Localizations to update */
-    update?: Maybe<Array<AssetUpdateLocalizationInput>>;
-    upsert?: Maybe<Array<AssetUpsertLocalizationInput>>;
-    /** Localizations to delete */
-    delete?: Maybe<Array<Locale>>;
-};
-
-/** An edge in a connection. */
-export type RecipeEdge = {
-    __typename?: 'RecipeEdge';
-    /** The item at the end of the edge. */
-    node: Recipe;
-    /** A cursor for use in pagination. */
-    cursor: Scalars['String'];
-};
-
-/** References UserLike record uniquely */
-export type UserLikeWhereUniqueInput = {
-    id?: Maybe<Scalars['ID']>;
-};
-
-export type UserLikeUpdateWithNestedWhereUniqueInput = {
-    /** Unique document search */
-    where: UserLikeWhereUniqueInput;
-    /** Document to update */
-    data: UserLikeUpdateInput;
-};
-
-/** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
-export type RichText = {
-    __typename?: 'RichText';
-    /** Returns AST representation */
-    raw: Scalars['RichTextAST'];
-    /** Returns HTMl representation */
-    html: Scalars['String'];
-    /** Returns Markdown representation */
-    markdown: Scalars['String'];
-    /** Returns plain-text contents of RichText */
-    text: Scalars['String'];
-};
-
-/** A connection to a list of items. */
-export type AssetConnection = {
-    __typename?: 'AssetConnection';
-    /** Information to aid in pagination. */
-    pageInfo: PageInfo;
-    /** A list of edges. */
-    edges: Array<AssetEdge>;
-    aggregate: Aggregate;
-};
-
-export type AssetUpdateLocalizationDataInput = {
-    handle?: Maybe<Scalars['String']>;
-    fileName?: Maybe<Scalars['String']>;
-    height?: Maybe<Scalars['Float']>;
-    width?: Maybe<Scalars['Float']>;
-    size?: Maybe<Scalars['Float']>;
-    mimeType?: Maybe<Scalars['String']>;
-};
-
-export type UserLikeUpdateOneInlineInput = {
-    /** Create and connect one UserLike document */
-    create?: Maybe<UserLikeCreateInput>;
-    /** Update single UserLike document */
-    update?: Maybe<UserLikeUpdateWithNestedWhereUniqueInput>;
-    /** Upsert single UserLike document */
-    upsert?: Maybe<UserLikeUpsertWithNestedWhereUniqueInput>;
-    /** Connect existing UserLike document */
-    connect?: Maybe<UserLikeWhereUniqueInput>;
-    /** Disconnect currently connected UserLike document */
-    disconnect?: Maybe<Scalars['Boolean']>;
-    /** Delete currently connected UserLike document */
-    delete?: Maybe<Scalars['Boolean']>;
-};
-
-export type UnpublishLocaleInput = {
-    /** Locales to unpublish */
-    locale: Locale;
-    /** Stages to unpublish selected locales from */
-    stages: Array<Stage>;
-};
-
-export type VersionWhereInput = {
-    id: Scalars['ID'];
-    stage: Stage;
-    revision: Scalars['Int'];
-};
-
-export type AssetConnectInput = {
-    /** Document to connect */
-    where: AssetWhereUniqueInput;
-    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-    position?: Maybe<ConnectPositionInput>;
-};
-
-/** A connection to a list of items. */
-export type RecipeConnection = {
-    __typename?: 'RecipeConnection';
-    /** Information to aid in pagination. */
-    pageInfo: PageInfo;
-    /** A list of edges. */
-    edges: Array<RecipeEdge>;
-    aggregate: Aggregate;
-};
-
-export type RecipeUpdateWithNestedWhereUniqueInput = {
-    /** Unique document search */
-    where: RecipeWhereUniqueInput;
-    /** Document to update */
-    data: RecipeUpdateInput;
-};
-
-export type ImageResizeInput = {
-    /** The width in pixels to resize the image to. The value must be an integer from 1 to 10000. */
-    width?: Maybe<Scalars['Int']>;
-    /** The height in pixels to resize the image to. The value must be an integer from 1 to 10000. */
-    height?: Maybe<Scalars['Int']>;
-    /** The default value for the fit parameter is fit:clip. */
-    fit?: Maybe<ImageFit>;
-};
-
-/** References Asset record uniquely */
-export type AssetWhereUniqueInput = {
-    id?: Maybe<Scalars['ID']>;
-};
-
-/** Input type representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
-export type RgbaInput = {
-    r: Scalars['RGBAHue'];
-    g: Scalars['RGBAHue'];
-    b: Scalars['RGBAHue'];
-    a: Scalars['RGBATransparency'];
-};
-
-export type RecipeUpdateInput = {
-    title?: Maybe<Scalars['String']>;
-    status_?: Maybe<Scalars['String']>;
-    description?: Maybe<Scalars['String']>;
-    images?: Maybe<AssetUpdateManyInlineInput>;
-    content?: Maybe<Scalars['String']>;
-    ingredients?: Maybe<Scalars['Json']>;
-    userLikes?: Maybe<UserLikeUpdateOneInlineInput>;
-    owner?: Maybe<Scalars['String']>;
-};
-
-export type UserLikeCreateOneInlineInput = {
-    /** Create and connect one UserLike document */
-    create?: Maybe<UserLikeCreateInput>;
-    /** Connect one existing UserLike document */
-    connect?: Maybe<UserLikeWhereUniqueInput>;
-};
-
-export type AssetUpdateManyLocalizationInput = {
-    fileName: Scalars['String'];
-    height?: Maybe<Scalars['Float']>;
-    width?: Maybe<Scalars['Float']>;
-    size?: Maybe<Scalars['Float']>;
-    mimeType?: Maybe<Scalars['String']>;
-};
-
-export type UserLike = Node & {
-    __typename?: 'UserLike';
-    /** System stage field */
-    stage: Stage;
-    /** Get the document in other stages */
-    documentInStages: Array<UserLike>;
-    /** The unique identifier */
-    id: Scalars['ID'];
-    /** The time the document was created */
-    createdAt: Scalars['DateTime'];
-    /** The time the document was updated */
-    updatedAt: Scalars['DateTime'];
-    /** The time the document was published. Null on documents in draft stage. */
-    publishedAt?: Maybe<Scalars['DateTime']>;
-    user?: Maybe<Scalars['String']>;
-    recipe?: Maybe<Recipe>;
-    /** List of UserLike versions */
-    history: Array<Version>;
-};
-
-export type UserLikeDocumentInStagesArgs = {
-    stages?: Array<Stage>;
-    includeCurrent?: Scalars['Boolean'];
-    inheritLocale?: Scalars['Boolean'];
-};
-
-export type UserLikeHistoryArgs = {
-    limit?: Scalars['Int'];
-    skip?: Scalars['Int'];
-    stageOverride?: Maybe<Stage>;
-};
-
-export type UserLikeCreateInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    user?: Maybe<Scalars['String']>;
-    recipe?: Maybe<RecipeCreateOneInlineInput>;
-};
-
-/** Representing a color value comprising of HEX, RGBA and css color values */
-export type Color = {
-    __typename?: 'Color';
-    hex: Scalars['Hex'];
-    rgba: Rgba;
-    css: Scalars['String'];
-};
-
-export enum DocumentFileTypes {
-    Jpg = 'jpg',
-    Odp = 'odp',
-    Ods = 'ods',
-    Odt = 'odt',
-    Png = 'png',
-    Svg = 'svg',
-    Txt = 'txt',
-    Webp = 'webp',
-    Docx = 'docx',
-    Pdf = 'pdf',
-    Html = 'html',
-    Doc = 'doc',
-    Xlsx = 'xlsx',
-    Xls = 'xls',
-    Pptx = 'pptx',
-    Ppt = 'ppt',
-}
-
-/** Transformations for Documents */
-export type DocumentTransformationInput = {
-    /** Changes the output for the file. */
-    output?: Maybe<DocumentOutputInput>;
-};
-
-export type Recipe = Node & {
-    __typename?: 'Recipe';
-    /** System stage field */
-    stage: Stage;
-    /** Get the document in other stages */
-    documentInStages: Array<Recipe>;
-    /** The unique identifier */
-    id: Scalars['ID'];
-    /** The time the document was created */
-    createdAt: Scalars['DateTime'];
-    /** The time the document was updated */
-    updatedAt: Scalars['DateTime'];
-    /** The time the document was published. Null on documents in draft stage. */
-    publishedAt?: Maybe<Scalars['DateTime']>;
-    title?: Maybe<Scalars['String']>;
-    status_?: Maybe<Scalars['String']>;
-    description?: Maybe<Scalars['String']>;
-    images: Array<Asset>;
-    content?: Maybe<Scalars['String']>;
-    ingredients?: Maybe<Scalars['Json']>;
-    userLikes?: Maybe<UserLike>;
-    owner?: Maybe<Scalars['String']>;
-    /** List of Recipe versions */
-    history: Array<Version>;
-};
-
-export type RecipeDocumentInStagesArgs = {
-    stages?: Array<Stage>;
-    includeCurrent?: Scalars['Boolean'];
-    inheritLocale?: Scalars['Boolean'];
-};
-
-export type RecipeImagesArgs = {
-    where?: Maybe<AssetWhereInput>;
-    orderBy?: Maybe<AssetOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-};
-
-export type RecipeHistoryArgs = {
-    limit?: Scalars['Int'];
-    skip?: Scalars['Int'];
-    stageOverride?: Maybe<Stage>;
-};
-
-export type BatchPayload = {
-    __typename?: 'BatchPayload';
-    /** The number of nodes that have been affected by the Batch operation. */
-    count: Scalars['Long'];
-};
-
-/** Identifies documents */
-export type UserLikeWhereInput = {
-    /** Contains search across all appropriate fields. */
-    _search?: Maybe<Scalars['String']>;
-    /** Logical AND on all given filters. */
-    AND?: Maybe<Array<UserLikeWhereInput>>;
-    /** Logical OR on all given filters. */
-    OR?: Maybe<Array<UserLikeWhereInput>>;
-    /** Logical NOT on all given filters combined by AND. */
-    NOT?: Maybe<Array<UserLikeWhereInput>>;
-    id?: Maybe<Scalars['ID']>;
-    /** All values that are not equal to given value. */
-    id_not?: Maybe<Scalars['ID']>;
-    /** All values that are contained in given list. */
-    id_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values that are not contained in given list. */
-    id_not_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values containing the given string. */
-    id_contains?: Maybe<Scalars['ID']>;
-    /** All values not containing the given string. */
-    id_not_contains?: Maybe<Scalars['ID']>;
-    /** All values starting with the given string. */
-    id_starts_with?: Maybe<Scalars['ID']>;
-    /** All values not starting with the given string. */
-    id_not_starts_with?: Maybe<Scalars['ID']>;
-    /** All values ending with the given string. */
-    id_ends_with?: Maybe<Scalars['ID']>;
-    /** All values not ending with the given string */
-    id_not_ends_with?: Maybe<Scalars['ID']>;
-    createdAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    createdAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    createdAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    createdAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    createdAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    createdAt_gte?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    updatedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    updatedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    updatedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    updatedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    updatedAt_gte?: Maybe<Scalars['DateTime']>;
-    publishedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    publishedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    publishedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    publishedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    publishedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    publishedAt_gte?: Maybe<Scalars['DateTime']>;
-    user?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    user_not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    user_in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    user_not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    user_contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    user_not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    user_starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    user_not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    user_ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    user_not_ends_with?: Maybe<Scalars['String']>;
-    recipe?: Maybe<RecipeWhereInput>;
-};
-
 export type UserLikeUpsertInput = {
     /** Create document if it didn't exist */
     create: UserLikeCreateInput;
@@ -849,42 +43,164 @@ export type UserLikeUpsertInput = {
     update: UserLikeUpdateInput;
 };
 
-/** Accepts either HEX or RGBA color value. At least one of hex or rgba value should be passed. If both are passed RGBA is used. */
-export type ColorInput = {
-    hex?: Maybe<Scalars['Hex']>;
-    rgba?: Maybe<RgbaInput>;
+export type Query = {
+    __typename?: 'Query';
+    /** Fetches an object given its ID */
+    node?: Maybe<Node>;
+    /** Retrieve multiple assets */
+    assets: Array<Asset>;
+    /** Retrieve a single asset */
+    asset?: Maybe<Asset>;
+    /** Retrieve multiple assets using the Relay connection interface */
+    assetsConnection: AssetConnection;
+    /** Retrieve document version */
+    assetVersion?: Maybe<DocumentVersion>;
+    /** Retrieve multiple recipes */
+    recipes: Array<Recipe>;
+    /** Retrieve a single recipe */
+    recipe?: Maybe<Recipe>;
+    /** Retrieve multiple recipes using the Relay connection interface */
+    recipesConnection: RecipeConnection;
+    /** Retrieve document version */
+    recipeVersion?: Maybe<DocumentVersion>;
+    /** Retrieve multiple userLikes */
+    userLikes: Array<UserLike>;
+    /** Retrieve a single userLike */
+    userLike?: Maybe<UserLike>;
+    /** Retrieve multiple userLikes using the Relay connection interface */
+    userLikesConnection: UserLikeConnection;
+    /** Retrieve document version */
+    userLikeVersion?: Maybe<DocumentVersion>;
 };
 
-/** Representing a geolocation point with latitude and longitude */
-export type Location = {
-    __typename?: 'Location';
-    latitude: Scalars['Float'];
-    longitude: Scalars['Float'];
-    distance: Scalars['Float'];
+export type QueryNodeArgs = {
+    id: Scalars['ID'];
+    stage?: Stage;
+    locales?: Array<Locale>;
 };
 
-/** Representing a geolocation point with latitude and longitude */
-export type LocationDistanceArgs = {
-    from: LocationInput;
+export type QueryAssetsArgs = {
+    where?: Maybe<AssetWhereInput>;
+    orderBy?: Maybe<AssetOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+    locales?: Array<Locale>;
 };
 
-/** Information about pagination in a connection. */
-export type PageInfo = {
-    __typename?: 'PageInfo';
-    /** When paginating forwards, are there more items? */
-    hasNextPage: Scalars['Boolean'];
-    /** When paginating backwards, are there more items? */
-    hasPreviousPage: Scalars['Boolean'];
-    /** When paginating backwards, the cursor to continue. */
-    startCursor?: Maybe<Scalars['String']>;
-    /** When paginating forwards, the cursor to continue. */
-    endCursor?: Maybe<Scalars['String']>;
+export type QueryAssetArgs = {
+    where: AssetWhereUniqueInput;
+    stage?: Stage;
+    locales?: Array<Locale>;
 };
 
-export enum _SystemDateTimeFieldVariation {
-    Base = 'base',
-    Localization = 'localization',
-    Combined = 'combined',
+export type QueryAssetsConnectionArgs = {
+    where?: Maybe<AssetWhereInput>;
+    orderBy?: Maybe<AssetOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+    locales?: Array<Locale>;
+};
+
+export type QueryAssetVersionArgs = {
+    where: VersionWhereInput;
+};
+
+export type QueryRecipesArgs = {
+    where?: Maybe<RecipeWhereInput>;
+    orderBy?: Maybe<RecipeOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+};
+
+export type QueryRecipeArgs = {
+    where: RecipeWhereUniqueInput;
+    stage?: Stage;
+};
+
+export type QueryRecipesConnectionArgs = {
+    where?: Maybe<RecipeWhereInput>;
+    orderBy?: Maybe<RecipeOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+};
+
+export type QueryRecipeVersionArgs = {
+    where: VersionWhereInput;
+};
+
+export type QueryUserLikesArgs = {
+    where?: Maybe<UserLikeWhereInput>;
+    orderBy?: Maybe<UserLikeOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+};
+
+export type QueryUserLikeArgs = {
+    where: UserLikeWhereUniqueInput;
+    stage?: Stage;
+};
+
+export type QueryUserLikesConnectionArgs = {
+    where?: Maybe<UserLikeWhereInput>;
+    orderBy?: Maybe<UserLikeOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+    stage?: Stage;
+};
+
+export type QueryUserLikeVersionArgs = {
+    where: VersionWhereInput;
+};
+
+export enum _FilterKind {
+    Search = 'search',
+    And = 'AND',
+    Or = 'OR',
+    Not = 'NOT',
+    Eq = 'eq',
+    EqNot = 'eq_not',
+    In = 'in',
+    NotIn = 'not_in',
+    Lt = 'lt',
+    Lte = 'lte',
+    Gt = 'gt',
+    Gte = 'gte',
+    Contains = 'contains',
+    NotContains = 'not_contains',
+    StartsWith = 'starts_with',
+    NotStartsWith = 'not_starts_with',
+    EndsWith = 'ends_with',
+    NotEndsWith = 'not_ends_with',
+    ContainsAll = 'contains_all',
+    ContainsSome = 'contains_some',
+    ContainsNone = 'contains_none',
+    RelationalSingle = 'relational_single',
+    RelationalEvery = 'relational_every',
+    RelationalSome = 'relational_some',
+    RelationalNone = 'relational_none',
 }
 
 /** Identifies documents */
@@ -1068,179 +384,114 @@ export type AssetWhereInput = {
     recipeImages_none?: Maybe<RecipeWhereInput>;
 };
 
-/** Identifies documents */
-export type RecipeManyWhereInput = {
-    /** Contains search across all appropriate fields. */
-    _search?: Maybe<Scalars['String']>;
-    /** Logical AND on all given filters. */
-    AND?: Maybe<Array<RecipeWhereInput>>;
-    /** Logical OR on all given filters. */
-    OR?: Maybe<Array<RecipeWhereInput>>;
-    /** Logical NOT on all given filters combined by AND. */
-    NOT?: Maybe<Array<RecipeWhereInput>>;
-    id?: Maybe<Scalars['ID']>;
-    /** All values that are not equal to given value. */
-    id_not?: Maybe<Scalars['ID']>;
-    /** All values that are contained in given list. */
-    id_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values that are not contained in given list. */
-    id_not_in?: Maybe<Array<Scalars['ID']>>;
-    /** All values containing the given string. */
-    id_contains?: Maybe<Scalars['ID']>;
-    /** All values not containing the given string. */
-    id_not_contains?: Maybe<Scalars['ID']>;
-    /** All values starting with the given string. */
-    id_starts_with?: Maybe<Scalars['ID']>;
-    /** All values not starting with the given string. */
-    id_not_starts_with?: Maybe<Scalars['ID']>;
-    /** All values ending with the given string. */
-    id_ends_with?: Maybe<Scalars['ID']>;
-    /** All values not ending with the given string */
-    id_not_ends_with?: Maybe<Scalars['ID']>;
+export type AssetCreateInput = {
     createdAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    createdAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    createdAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    createdAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    createdAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    createdAt_gte?: Maybe<Scalars['DateTime']>;
     updatedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    updatedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    updatedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    updatedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    updatedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    updatedAt_gte?: Maybe<Scalars['DateTime']>;
-    publishedAt?: Maybe<Scalars['DateTime']>;
-    /** All values that are not equal to given value. */
-    publishedAt_not?: Maybe<Scalars['DateTime']>;
-    /** All values that are contained in given list. */
-    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values that are not contained in given list. */
-    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
-    /** All values less than the given value. */
-    publishedAt_lt?: Maybe<Scalars['DateTime']>;
-    /** All values less than or equal the given value. */
-    publishedAt_lte?: Maybe<Scalars['DateTime']>;
-    /** All values greater than the given value. */
-    publishedAt_gt?: Maybe<Scalars['DateTime']>;
-    /** All values greater than or equal the given value. */
-    publishedAt_gte?: Maybe<Scalars['DateTime']>;
-    title?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    title_not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    title_in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    title_not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    title_contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    title_not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    title_starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    title_not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    title_ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    title_not_ends_with?: Maybe<Scalars['String']>;
-    status_?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    status__not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    status__in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    status__not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    status__contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    status__not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    status__starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    status__not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    status__ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    status__not_ends_with?: Maybe<Scalars['String']>;
-    description?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    description_not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    description_in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    description_not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    description_contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    description_not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    description_starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    description_not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    description_ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    description_not_ends_with?: Maybe<Scalars['String']>;
-    images_every?: Maybe<AssetWhereInput>;
-    images_some?: Maybe<AssetWhereInput>;
-    images_none?: Maybe<AssetWhereInput>;
-    content?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    content_not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    content_in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    content_not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    content_contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    content_not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    content_starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    content_not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    content_ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    content_not_ends_with?: Maybe<Scalars['String']>;
-    userLikes?: Maybe<UserLikeWhereInput>;
-    owner?: Maybe<Scalars['String']>;
-    /** All values that are not equal to given value. */
-    owner_not?: Maybe<Scalars['String']>;
-    /** All values that are contained in given list. */
-    owner_in?: Maybe<Array<Scalars['String']>>;
-    /** All values that are not contained in given list. */
-    owner_not_in?: Maybe<Array<Scalars['String']>>;
-    /** All values containing the given string. */
-    owner_contains?: Maybe<Scalars['String']>;
-    /** All values not containing the given string. */
-    owner_not_contains?: Maybe<Scalars['String']>;
-    /** All values starting with the given string. */
-    owner_starts_with?: Maybe<Scalars['String']>;
-    /** All values not starting with the given string. */
-    owner_not_starts_with?: Maybe<Scalars['String']>;
-    /** All values ending with the given string. */
-    owner_ends_with?: Maybe<Scalars['String']>;
-    /** All values not ending with the given string */
-    owner_not_ends_with?: Maybe<Scalars['String']>;
+    handle: Scalars['String'];
+    fileName: Scalars['String'];
+    height?: Maybe<Scalars['Float']>;
+    width?: Maybe<Scalars['Float']>;
+    size?: Maybe<Scalars['Float']>;
+    mimeType?: Maybe<Scalars['String']>;
+    recipeImages?: Maybe<RecipeCreateManyInlineInput>;
+    /** Inline mutations for managing document localizations excluding the default locale */
+    localizations?: Maybe<AssetCreateLocalizationsInput>;
+};
+
+/** References UserLike record uniquely */
+export type UserLikeWhereUniqueInput = {
+    id?: Maybe<Scalars['ID']>;
+};
+
+/** An edge in a connection. */
+export type AssetEdge = {
+    __typename?: 'AssetEdge';
+    /** The item at the end of the edge. */
+    node: Asset;
+    /** A cursor for use in pagination. */
+    cursor: Scalars['String'];
+};
+
+export type UserLikeCreateOneInlineInput = {
+    /** Create and connect one UserLike document */
+    create?: Maybe<UserLikeCreateInput>;
+    /** Connect one existing UserLike document */
+    connect?: Maybe<UserLikeWhereUniqueInput>;
+};
+
+export type UserLikeUpdateManyInlineInput = {
+    /** Create and connect multiple UserLike documents */
+    create?: Maybe<Array<UserLikeCreateInput>>;
+    /** Connect multiple existing UserLike documents */
+    connect?: Maybe<Array<UserLikeConnectInput>>;
+    /** Override currently-connected documents with multiple existing UserLike documents */
+    set?: Maybe<Array<UserLikeWhereUniqueInput>>;
+    /** Update multiple UserLike documents */
+    update?: Maybe<Array<UserLikeUpdateWithNestedWhereUniqueInput>>;
+    /** Upsert multiple UserLike documents */
+    upsert?: Maybe<Array<UserLikeUpsertWithNestedWhereUniqueInput>>;
+    /** Disconnect multiple UserLike documents */
+    disconnect?: Maybe<Array<UserLikeWhereUniqueInput>>;
+    /** Delete multiple UserLike documents */
+    delete?: Maybe<Array<UserLikeWhereUniqueInput>>;
+};
+
+export type AssetConnectInput = {
+    /** Document to connect */
+    where: AssetWhereUniqueInput;
+    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+    position?: Maybe<ConnectPositionInput>;
+};
+
+export type AssetUpsertLocalizationInput = {
+    update: AssetUpdateLocalizationDataInput;
+    create: AssetCreateLocalizationDataInput;
+    locale: Locale;
+};
+
+export type UnpublishLocaleInput = {
+    /** Locales to unpublish */
+    locale: Locale;
+    /** Stages to unpublish selected locales from */
+    stages: Array<Stage>;
+};
+
+export enum _RelationInputKind {
+    Create = 'create',
+    Update = 'update',
+}
+
+export type ImageResizeInput = {
+    /** The width in pixels to resize the image to. The value must be an integer from 1 to 10000. */
+    width?: Maybe<Scalars['Int']>;
+    /** The height in pixels to resize the image to. The value must be an integer from 1 to 10000. */
+    height?: Maybe<Scalars['Int']>;
+    /** The default value for the fit parameter is fit:clip. */
+    fit?: Maybe<ImageFit>;
+};
+
+export type Aggregate = {
+    __typename?: 'Aggregate';
+    count: Scalars['Int'];
+};
+
+export enum _RelationInputCardinality {
+    One = 'one',
+    Many = 'many',
+}
+
+export type AssetUpsertInput = {
+    /** Create document if it didn't exist */
+    create: AssetCreateInput;
+    /** Update document if it exists */
+    update: AssetUpdateInput;
+};
+
+export type RecipeUpdateManyWithNestedWhereInput = {
+    /** Document search */
+    where: RecipeWhereInput;
+    /** Update many input */
+    data: RecipeUpdateManyInput;
 };
 
 export type Mutation = {
@@ -1459,6 +710,274 @@ export type MutationUnpublishManyUserLikesArgs = {
     from?: Array<Stage>;
 };
 
+/** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
+export type Rgba = {
+    __typename?: 'RGBA';
+    r: Scalars['RGBAHue'];
+    g: Scalars['RGBAHue'];
+    b: Scalars['RGBAHue'];
+    a: Scalars['RGBATransparency'];
+};
+
+/** References Recipe record uniquely */
+export type RecipeWhereUniqueInput = {
+    id?: Maybe<Scalars['ID']>;
+};
+
+/** Identifies documents */
+export type UserLikeWhereInput = {
+    /** Contains search across all appropriate fields. */
+    _search?: Maybe<Scalars['String']>;
+    /** Logical AND on all given filters. */
+    AND?: Maybe<Array<UserLikeWhereInput>>;
+    /** Logical OR on all given filters. */
+    OR?: Maybe<Array<UserLikeWhereInput>>;
+    /** Logical NOT on all given filters combined by AND. */
+    NOT?: Maybe<Array<UserLikeWhereInput>>;
+    id?: Maybe<Scalars['ID']>;
+    /** All values that are not equal to given value. */
+    id_not?: Maybe<Scalars['ID']>;
+    /** All values that are contained in given list. */
+    id_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values that are not contained in given list. */
+    id_not_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values containing the given string. */
+    id_contains?: Maybe<Scalars['ID']>;
+    /** All values not containing the given string. */
+    id_not_contains?: Maybe<Scalars['ID']>;
+    /** All values starting with the given string. */
+    id_starts_with?: Maybe<Scalars['ID']>;
+    /** All values not starting with the given string. */
+    id_not_starts_with?: Maybe<Scalars['ID']>;
+    /** All values ending with the given string. */
+    id_ends_with?: Maybe<Scalars['ID']>;
+    /** All values not ending with the given string */
+    id_not_ends_with?: Maybe<Scalars['ID']>;
+    createdAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    createdAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    createdAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    createdAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    createdAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    createdAt_gte?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    updatedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    updatedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    updatedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    updatedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    updatedAt_gte?: Maybe<Scalars['DateTime']>;
+    publishedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    publishedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    publishedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    publishedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    publishedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    publishedAt_gte?: Maybe<Scalars['DateTime']>;
+    user?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    user_not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    user_in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    user_not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    user_contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    user_not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    user_starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    user_not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    user_ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    user_not_ends_with?: Maybe<Scalars['String']>;
+    recipe?: Maybe<RecipeWhereInput>;
+};
+
+export type UserLikeUpdateInput = {
+    user?: Maybe<Scalars['String']>;
+    recipe?: Maybe<RecipeUpdateOneInlineInput>;
+};
+
+/** An edge in a connection. */
+export type UserLikeEdge = {
+    __typename?: 'UserLikeEdge';
+    /** The item at the end of the edge. */
+    node: UserLike;
+    /** A cursor for use in pagination. */
+    cursor: Scalars['String'];
+};
+
+/** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
+export type RichText = {
+    __typename?: 'RichText';
+    /** Returns AST representation */
+    raw: Scalars['RichTextAST'];
+    /** Returns HTMl representation */
+    html: Scalars['String'];
+    /** Returns Markdown representation */
+    markdown: Scalars['String'];
+    /** Returns plain-text contents of RichText */
+    text: Scalars['String'];
+};
+
+export enum SystemDateTimeFieldVariation {
+    Base = 'BASE',
+    Localization = 'LOCALIZATION',
+    Combined = 'COMBINED',
+}
+
+/** Transformations for Documents */
+export type DocumentTransformationInput = {
+    /** Changes the output for the file. */
+    output?: Maybe<DocumentOutputInput>;
+};
+
+/** Identifies documents */
+export type AssetManyWhereInput = {
+    /** Contains search across all appropriate fields. */
+    _search?: Maybe<Scalars['String']>;
+    /** Logical AND on all given filters. */
+    AND?: Maybe<Array<AssetWhereInput>>;
+    /** Logical OR on all given filters. */
+    OR?: Maybe<Array<AssetWhereInput>>;
+    /** Logical NOT on all given filters combined by AND. */
+    NOT?: Maybe<Array<AssetWhereInput>>;
+    id?: Maybe<Scalars['ID']>;
+    /** All values that are not equal to given value. */
+    id_not?: Maybe<Scalars['ID']>;
+    /** All values that are contained in given list. */
+    id_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values that are not contained in given list. */
+    id_not_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values containing the given string. */
+    id_contains?: Maybe<Scalars['ID']>;
+    /** All values not containing the given string. */
+    id_not_contains?: Maybe<Scalars['ID']>;
+    /** All values starting with the given string. */
+    id_starts_with?: Maybe<Scalars['ID']>;
+    /** All values not starting with the given string. */
+    id_not_starts_with?: Maybe<Scalars['ID']>;
+    /** All values ending with the given string. */
+    id_ends_with?: Maybe<Scalars['ID']>;
+    /** All values not ending with the given string */
+    id_not_ends_with?: Maybe<Scalars['ID']>;
+    createdAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    createdAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    createdAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    createdAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    createdAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    createdAt_gte?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    updatedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    updatedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    updatedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    updatedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    updatedAt_gte?: Maybe<Scalars['DateTime']>;
+    publishedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    publishedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    publishedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    publishedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    publishedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    publishedAt_gte?: Maybe<Scalars['DateTime']>;
+    recipeImages_every?: Maybe<RecipeWhereInput>;
+    recipeImages_some?: Maybe<RecipeWhereInput>;
+    recipeImages_none?: Maybe<RecipeWhereInput>;
+};
+
+export type AssetCreateOneInlineInput = {
+    /** Create and connect one Asset document */
+    create?: Maybe<AssetCreateInput>;
+    /** Connect one existing Asset document */
+    connect?: Maybe<AssetWhereUniqueInput>;
+};
+
+export type AssetCreateManyInlineInput = {
+    /** Create and connect multiple existing Asset documents */
+    create?: Maybe<Array<AssetCreateInput>>;
+    /** Connect multiple existing Asset documents */
+    connect?: Maybe<Array<AssetWhereUniqueInput>>;
+};
+
+export enum _MutationKind {
+    Create = 'create',
+    Publish = 'publish',
+    Unpublish = 'unpublish',
+    Update = 'update',
+    Upsert = 'upsert',
+    Delete = 'delete',
+    UpdateMany = 'updateMany',
+    PublishMany = 'publishMany',
+    UnpublishMany = 'unpublishMany',
+    DeleteMany = 'deleteMany',
+}
+
+/** An object with an ID */
+export type Node = {
+    /** The id of the object. */
+    id: Scalars['ID'];
+    /** The Stage of an object */
+    stage: Stage;
+};
+
+export enum _RelationKind {
+    Regular = 'regular',
+    Union = 'union',
+}
+
 export enum AssetOrderByInput {
     IdAsc = 'id_ASC',
     IdDesc = 'id_DESC',
@@ -1482,258 +1001,6 @@ export enum AssetOrderByInput {
     MimeTypeDesc = 'mimeType_DESC',
 }
 
-export type AssetCreateLocalizationInput = {
-    /** Localization input */
-    data: AssetCreateLocalizationDataInput;
-    locale: Locale;
-};
-
-export type AssetCreateLocalizationDataInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    handle: Scalars['String'];
-    fileName: Scalars['String'];
-    height?: Maybe<Scalars['Float']>;
-    width?: Maybe<Scalars['Float']>;
-    size?: Maybe<Scalars['Float']>;
-    mimeType?: Maybe<Scalars['String']>;
-};
-
-export enum _FilterKind {
-    Search = 'search',
-    And = 'AND',
-    Or = 'OR',
-    Not = 'NOT',
-    Eq = 'eq',
-    EqNot = 'eq_not',
-    In = 'in',
-    NotIn = 'not_in',
-    Lt = 'lt',
-    Lte = 'lte',
-    Gt = 'gt',
-    Gte = 'gte',
-    Contains = 'contains',
-    NotContains = 'not_contains',
-    StartsWith = 'starts_with',
-    NotStartsWith = 'not_starts_with',
-    EndsWith = 'ends_with',
-    NotEndsWith = 'not_ends_with',
-    ContainsAll = 'contains_all',
-    ContainsSome = 'contains_some',
-    ContainsNone = 'contains_none',
-    RelationalSingle = 'relational_single',
-    RelationalEvery = 'relational_every',
-    RelationalSome = 'relational_some',
-    RelationalNone = 'relational_none',
-}
-
-export type PublishLocaleInput = {
-    /** Locales to publish */
-    locale: Locale;
-    /** Stages to publish selected locales to */
-    stages: Array<Stage>;
-};
-
-export type AssetUpdateManyWithNestedWhereInput = {
-    /** Document search */
-    where: AssetWhereInput;
-    /** Update many input */
-    data: AssetUpdateManyInput;
-};
-
-export type AssetUpdateOneInlineInput = {
-    /** Create and connect one Asset document */
-    create?: Maybe<AssetCreateInput>;
-    /** Update single Asset document */
-    update?: Maybe<AssetUpdateWithNestedWhereUniqueInput>;
-    /** Upsert single Asset document */
-    upsert?: Maybe<AssetUpsertWithNestedWhereUniqueInput>;
-    /** Connect existing Asset document */
-    connect?: Maybe<AssetWhereUniqueInput>;
-    /** Disconnect currently connected Asset document */
-    disconnect?: Maybe<Scalars['Boolean']>;
-    /** Delete currently connected Asset document */
-    delete?: Maybe<Scalars['Boolean']>;
-};
-
-/** An edge in a connection. */
-export type UserLikeEdge = {
-    __typename?: 'UserLikeEdge';
-    /** The item at the end of the edge. */
-    node: UserLike;
-    /** A cursor for use in pagination. */
-    cursor: Scalars['String'];
-};
-
-export type RecipeCreateInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    title?: Maybe<Scalars['String']>;
-    status_?: Maybe<Scalars['String']>;
-    description?: Maybe<Scalars['String']>;
-    images?: Maybe<AssetCreateManyInlineInput>;
-    content?: Maybe<Scalars['String']>;
-    ingredients?: Maybe<Scalars['Json']>;
-    userLikes?: Maybe<UserLikeCreateOneInlineInput>;
-    owner?: Maybe<Scalars['String']>;
-};
-
-export type Query = {
-    __typename?: 'Query';
-    /** Fetches an object given its ID */
-    node?: Maybe<Node>;
-    /** Retrieve multiple assets */
-    assets: Array<Asset>;
-    /** Retrieve a single asset */
-    asset?: Maybe<Asset>;
-    /** Retrieve multiple assets using the Relay connection interface */
-    assetsConnection: AssetConnection;
-    /** Retrieve document version */
-    assetVersion?: Maybe<DocumentVersion>;
-    /** Retrieve multiple recipes */
-    recipes: Array<Recipe>;
-    /** Retrieve a single recipe */
-    recipe?: Maybe<Recipe>;
-    /** Retrieve multiple recipes using the Relay connection interface */
-    recipesConnection: RecipeConnection;
-    /** Retrieve document version */
-    recipeVersion?: Maybe<DocumentVersion>;
-    /** Retrieve multiple userLikes */
-    userLikes: Array<UserLike>;
-    /** Retrieve a single userLike */
-    userLike?: Maybe<UserLike>;
-    /** Retrieve multiple userLikes using the Relay connection interface */
-    userLikesConnection: UserLikeConnection;
-    /** Retrieve document version */
-    userLikeVersion?: Maybe<DocumentVersion>;
-};
-
-export type QueryNodeArgs = {
-    id: Scalars['ID'];
-    stage?: Stage;
-    locales?: Array<Locale>;
-};
-
-export type QueryAssetsArgs = {
-    where?: Maybe<AssetWhereInput>;
-    orderBy?: Maybe<AssetOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-    locales?: Array<Locale>;
-};
-
-export type QueryAssetArgs = {
-    where: AssetWhereUniqueInput;
-    stage?: Stage;
-    locales?: Array<Locale>;
-};
-
-export type QueryAssetsConnectionArgs = {
-    where?: Maybe<AssetWhereInput>;
-    orderBy?: Maybe<AssetOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-    locales?: Array<Locale>;
-};
-
-export type QueryAssetVersionArgs = {
-    where: VersionWhereInput;
-};
-
-export type QueryRecipesArgs = {
-    where?: Maybe<RecipeWhereInput>;
-    orderBy?: Maybe<RecipeOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-};
-
-export type QueryRecipeArgs = {
-    where: RecipeWhereUniqueInput;
-    stage?: Stage;
-};
-
-export type QueryRecipesConnectionArgs = {
-    where?: Maybe<RecipeWhereInput>;
-    orderBy?: Maybe<RecipeOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-};
-
-export type QueryRecipeVersionArgs = {
-    where: VersionWhereInput;
-};
-
-export type QueryUserLikesArgs = {
-    where?: Maybe<UserLikeWhereInput>;
-    orderBy?: Maybe<UserLikeOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-};
-
-export type QueryUserLikeArgs = {
-    where: UserLikeWhereUniqueInput;
-    stage?: Stage;
-};
-
-export type QueryUserLikesConnectionArgs = {
-    where?: Maybe<UserLikeWhereInput>;
-    orderBy?: Maybe<UserLikeOrderByInput>;
-    skip?: Maybe<Scalars['Int']>;
-    after?: Maybe<Scalars['String']>;
-    before?: Maybe<Scalars['String']>;
-    first?: Maybe<Scalars['Int']>;
-    last?: Maybe<Scalars['Int']>;
-    stage?: Stage;
-};
-
-export type QueryUserLikeVersionArgs = {
-    where: VersionWhereInput;
-};
-
-/** Locale system enumeration */
-export enum Locale {
-    /** System locale */
-    En = 'en',
-}
-
-export type AssetUpsertWithNestedWhereUniqueInput = {
-    /** Unique document search */
-    where: AssetWhereUniqueInput;
-    /** Upsert data */
-    data: AssetUpsertInput;
-};
-
-export type RecipeUpdateManyInput = {
-    createdAt?: Maybe<Scalars['DateTime']>;
-    updatedAt?: Maybe<Scalars['DateTime']>;
-    title?: Maybe<Scalars['String']>;
-    status_?: Maybe<Scalars['String']>;
-    description?: Maybe<Scalars['String']>;
-    content?: Maybe<Scalars['String']>;
-    ingredients?: Maybe<Scalars['Json']>;
-    owner?: Maybe<Scalars['String']>;
-};
-
 export type RecipeCreateManyInlineInput = {
     /** Create and connect multiple existing Recipe documents */
     create?: Maybe<Array<RecipeCreateInput>>;
@@ -1741,12 +1008,334 @@ export type RecipeCreateManyInlineInput = {
     connect?: Maybe<Array<RecipeWhereUniqueInput>>;
 };
 
-/** Stage system enumeration */
-export enum Stage {
-    /** System Draft Stage */
-    Draft = 'DRAFT',
-    /** System Published Stage */
-    Published = 'PUBLISHED',
+export type RecipeUpdateManyInlineInput = {
+    /** Create and connect multiple Recipe documents */
+    create?: Maybe<Array<RecipeCreateInput>>;
+    /** Connect multiple existing Recipe documents */
+    connect?: Maybe<Array<RecipeConnectInput>>;
+    /** Override currently-connected documents with multiple existing Recipe documents */
+    set?: Maybe<Array<RecipeWhereUniqueInput>>;
+    /** Update multiple Recipe documents */
+    update?: Maybe<Array<RecipeUpdateWithNestedWhereUniqueInput>>;
+    /** Upsert multiple Recipe documents */
+    upsert?: Maybe<Array<RecipeUpsertWithNestedWhereUniqueInput>>;
+    /** Disconnect multiple Recipe documents */
+    disconnect?: Maybe<Array<RecipeWhereUniqueInput>>;
+    /** Delete multiple Recipe documents */
+    delete?: Maybe<Array<RecipeWhereUniqueInput>>;
+};
+
+export type UserLikeUpdateOneInlineInput = {
+    /** Create and connect one UserLike document */
+    create?: Maybe<UserLikeCreateInput>;
+    /** Update single UserLike document */
+    update?: Maybe<UserLikeUpdateWithNestedWhereUniqueInput>;
+    /** Upsert single UserLike document */
+    upsert?: Maybe<UserLikeUpsertWithNestedWhereUniqueInput>;
+    /** Connect existing UserLike document */
+    connect?: Maybe<UserLikeWhereUniqueInput>;
+    /** Disconnect currently connected UserLike document */
+    disconnect?: Maybe<Scalars['Boolean']>;
+    /** Delete currently connected UserLike document */
+    delete?: Maybe<Scalars['Boolean']>;
+};
+
+/** Input type representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
+export type RgbaInput = {
+    r: Scalars['RGBAHue'];
+    g: Scalars['RGBAHue'];
+    b: Scalars['RGBAHue'];
+    a: Scalars['RGBATransparency'];
+};
+
+/** Representing a color value comprising of HEX, RGBA and css color values */
+export type Color = {
+    __typename?: 'Color';
+    hex: Scalars['Hex'];
+    rgba: Rgba;
+    css: Scalars['String'];
+};
+
+export type DocumentVersion = {
+    __typename?: 'DocumentVersion';
+    id: Scalars['ID'];
+    stage: Stage;
+    revision: Scalars['Int'];
+    createdAt: Scalars['DateTime'];
+    data?: Maybe<Scalars['Json']>;
+};
+
+export type AssetUpdateWithNestedWhereUniqueInput = {
+    /** Unique document search */
+    where: AssetWhereUniqueInput;
+    /** Document to update */
+    data: AssetUpdateInput;
+};
+
+export type UserLikeCreateInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    user?: Maybe<Scalars['String']>;
+    recipe?: Maybe<RecipeCreateOneInlineInput>;
+};
+
+export type UserLikeCreateManyInlineInput = {
+    /** Create and connect multiple existing UserLike documents */
+    create?: Maybe<Array<UserLikeCreateInput>>;
+    /** Connect multiple existing UserLike documents */
+    connect?: Maybe<Array<UserLikeWhereUniqueInput>>;
+};
+
+export type AssetUpdateManyInlineInput = {
+    /** Create and connect multiple Asset documents */
+    create?: Maybe<Array<AssetCreateInput>>;
+    /** Connect multiple existing Asset documents */
+    connect?: Maybe<Array<AssetConnectInput>>;
+    /** Override currently-connected documents with multiple existing Asset documents */
+    set?: Maybe<Array<AssetWhereUniqueInput>>;
+    /** Update multiple Asset documents */
+    update?: Maybe<Array<AssetUpdateWithNestedWhereUniqueInput>>;
+    /** Upsert multiple Asset documents */
+    upsert?: Maybe<Array<AssetUpsertWithNestedWhereUniqueInput>>;
+    /** Disconnect multiple Asset documents */
+    disconnect?: Maybe<Array<AssetWhereUniqueInput>>;
+    /** Delete multiple Asset documents */
+    delete?: Maybe<Array<AssetWhereUniqueInput>>;
+};
+
+export type DocumentOutputInput = {
+    /**
+     * Transforms a document into a desired file type.
+     * See this matrix for format support:
+     *
+     * PDF:	jpg, odp, ods, odt, png, svg, txt, and webp
+     * DOC:	docx, html, jpg, odt, pdf, png, svg, txt, and webp
+     * DOCX:	doc, html, jpg, odt, pdf, png, svg, txt, and webp
+     * ODT:	doc, docx, html, jpg, pdf, png, svg, txt, and webp
+     * XLS:	jpg, pdf, ods, png, svg, xlsx, and webp
+     * XLSX:	jpg, pdf, ods, png, svg, xls, and webp
+     * ODS:	jpg, pdf, png, xls, svg, xlsx, and webp
+     * PPT:	jpg, odp, pdf, png, svg, pptx, and webp
+     * PPTX:	jpg, odp, pdf, png, svg, ppt, and webp
+     * ODP:	jpg, pdf, png, ppt, svg, pptx, and webp
+     * BMP:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * GIF:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * JPG:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * PNG:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * WEBP:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * TIFF:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * AI:	    jpg, odp, ods, odt, pdf, png, svg, and webp
+     * PSD:	jpg, odp, ods, odt, pdf, png, svg, and webp
+     * SVG:	jpg, odp, ods, odt, pdf, png, and webp
+     * HTML:	jpg, odt, pdf, svg, txt, and webp
+     * TXT:	jpg, html, odt, pdf, svg, and webp
+     */
+    format?: Maybe<DocumentFileTypes>;
+};
+
+/** An edge in a connection. */
+export type RecipeEdge = {
+    __typename?: 'RecipeEdge';
+    /** The item at the end of the edge. */
+    node: Recipe;
+    /** A cursor for use in pagination. */
+    cursor: Scalars['String'];
+};
+
+/** Identifies documents */
+export type RecipeManyWhereInput = {
+    /** Contains search across all appropriate fields. */
+    _search?: Maybe<Scalars['String']>;
+    /** Logical AND on all given filters. */
+    AND?: Maybe<Array<RecipeWhereInput>>;
+    /** Logical OR on all given filters. */
+    OR?: Maybe<Array<RecipeWhereInput>>;
+    /** Logical NOT on all given filters combined by AND. */
+    NOT?: Maybe<Array<RecipeWhereInput>>;
+    id?: Maybe<Scalars['ID']>;
+    /** All values that are not equal to given value. */
+    id_not?: Maybe<Scalars['ID']>;
+    /** All values that are contained in given list. */
+    id_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values that are not contained in given list. */
+    id_not_in?: Maybe<Array<Scalars['ID']>>;
+    /** All values containing the given string. */
+    id_contains?: Maybe<Scalars['ID']>;
+    /** All values not containing the given string. */
+    id_not_contains?: Maybe<Scalars['ID']>;
+    /** All values starting with the given string. */
+    id_starts_with?: Maybe<Scalars['ID']>;
+    /** All values not starting with the given string. */
+    id_not_starts_with?: Maybe<Scalars['ID']>;
+    /** All values ending with the given string. */
+    id_ends_with?: Maybe<Scalars['ID']>;
+    /** All values not ending with the given string */
+    id_not_ends_with?: Maybe<Scalars['ID']>;
+    createdAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    createdAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    createdAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    createdAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    createdAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    createdAt_gte?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    updatedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    updatedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    updatedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    updatedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    updatedAt_gte?: Maybe<Scalars['DateTime']>;
+    publishedAt?: Maybe<Scalars['DateTime']>;
+    /** All values that are not equal to given value. */
+    publishedAt_not?: Maybe<Scalars['DateTime']>;
+    /** All values that are contained in given list. */
+    publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values that are not contained in given list. */
+    publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+    /** All values less than the given value. */
+    publishedAt_lt?: Maybe<Scalars['DateTime']>;
+    /** All values less than or equal the given value. */
+    publishedAt_lte?: Maybe<Scalars['DateTime']>;
+    /** All values greater than the given value. */
+    publishedAt_gt?: Maybe<Scalars['DateTime']>;
+    /** All values greater than or equal the given value. */
+    publishedAt_gte?: Maybe<Scalars['DateTime']>;
+    title?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    title_not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    title_in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    title_not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    title_contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    title_not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    title_starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    title_not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    title_ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    title_not_ends_with?: Maybe<Scalars['String']>;
+    status_?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    status__not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    status__in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    status__not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    status__contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    status__not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    status__starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    status__not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    status__ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    status__not_ends_with?: Maybe<Scalars['String']>;
+    description?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    description_not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    description_in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    description_not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    description_contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    description_not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    description_starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    description_not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    description_ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    description_not_ends_with?: Maybe<Scalars['String']>;
+    images_every?: Maybe<AssetWhereInput>;
+    images_some?: Maybe<AssetWhereInput>;
+    images_none?: Maybe<AssetWhereInput>;
+    content?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    content_not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    content_in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    content_not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    content_contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    content_not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    content_starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    content_not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    content_ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    content_not_ends_with?: Maybe<Scalars['String']>;
+    userLikes?: Maybe<UserLikeWhereInput>;
+    owner?: Maybe<Scalars['String']>;
+    /** All values that are not equal to given value. */
+    owner_not?: Maybe<Scalars['String']>;
+    /** All values that are contained in given list. */
+    owner_in?: Maybe<Array<Scalars['String']>>;
+    /** All values that are not contained in given list. */
+    owner_not_in?: Maybe<Array<Scalars['String']>>;
+    /** All values containing the given string. */
+    owner_contains?: Maybe<Scalars['String']>;
+    /** All values not containing the given string. */
+    owner_not_contains?: Maybe<Scalars['String']>;
+    /** All values starting with the given string. */
+    owner_starts_with?: Maybe<Scalars['String']>;
+    /** All values not starting with the given string. */
+    owner_not_starts_with?: Maybe<Scalars['String']>;
+    /** All values ending with the given string. */
+    owner_ends_with?: Maybe<Scalars['String']>;
+    /** All values not ending with the given string */
+    owner_not_ends_with?: Maybe<Scalars['String']>;
+};
+
+export enum RecipeOrderByInput {
+    IdAsc = 'id_ASC',
+    IdDesc = 'id_DESC',
+    CreatedAtAsc = 'createdAt_ASC',
+    CreatedAtDesc = 'createdAt_DESC',
+    UpdatedAtAsc = 'updatedAt_ASC',
+    UpdatedAtDesc = 'updatedAt_DESC',
+    PublishedAtAsc = 'publishedAt_ASC',
+    PublishedAtDesc = 'publishedAt_DESC',
+    TitleAsc = 'title_ASC',
+    TitleDesc = 'title_DESC',
+    StatusAsc = 'status__ASC',
+    StatusDesc = 'status__DESC',
+    DescriptionAsc = 'description_ASC',
+    DescriptionDesc = 'description_DESC',
+    ContentAsc = 'content_ASC',
+    ContentDesc = 'content_DESC',
+    OwnerAsc = 'owner_ASC',
+    OwnerDesc = 'owner_DESC',
 }
 
 /** Identifies documents */
@@ -1924,11 +1513,141 @@ export type RecipeWhereInput = {
     owner_not_ends_with?: Maybe<Scalars['String']>;
 };
 
-export type RecipeUpsertWithNestedWhereUniqueInput = {
+export type RecipeUpdateOneInlineInput = {
+    /** Create and connect one Recipe document */
+    create?: Maybe<RecipeCreateInput>;
+    /** Update single Recipe document */
+    update?: Maybe<RecipeUpdateWithNestedWhereUniqueInput>;
+    /** Upsert single Recipe document */
+    upsert?: Maybe<RecipeUpsertWithNestedWhereUniqueInput>;
+    /** Connect existing Recipe document */
+    connect?: Maybe<RecipeWhereUniqueInput>;
+    /** Disconnect currently connected Recipe document */
+    disconnect?: Maybe<Scalars['Boolean']>;
+    /** Delete currently connected Recipe document */
+    delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type AssetUpdateInput = {
+    handle?: Maybe<Scalars['String']>;
+    fileName?: Maybe<Scalars['String']>;
+    height?: Maybe<Scalars['Float']>;
+    width?: Maybe<Scalars['Float']>;
+    size?: Maybe<Scalars['Float']>;
+    mimeType?: Maybe<Scalars['String']>;
+    recipeImages?: Maybe<RecipeUpdateManyInlineInput>;
+    /** Manage document localizations */
+    localizations?: Maybe<AssetUpdateLocalizationsInput>;
+};
+
+export type BatchPayload = {
+    __typename?: 'BatchPayload';
+    /** The number of nodes that have been affected by the Batch operation. */
+    count: Scalars['Long'];
+};
+
+/** References Asset record uniquely */
+export type AssetWhereUniqueInput = {
+    id?: Maybe<Scalars['ID']>;
+};
+
+/** Accepts either HEX or RGBA color value. At least one of hex or rgba value should be passed. If both are passed RGBA is used. */
+export type ColorInput = {
+    hex?: Maybe<Scalars['Hex']>;
+    rgba?: Maybe<RgbaInput>;
+};
+
+/** Stage system enumeration */
+export enum Stage {
+    /** System Draft Stage */
+    Draft = 'DRAFT',
+    /** System Published Stage */
+    Published = 'PUBLISHED',
+}
+
+/** Locale system enumeration */
+export enum Locale {
+    /** System locale */
+    En = 'en',
+}
+
+export enum DocumentFileTypes {
+    Jpg = 'jpg',
+    Odp = 'odp',
+    Ods = 'ods',
+    Odt = 'odt',
+    Png = 'png',
+    Svg = 'svg',
+    Txt = 'txt',
+    Webp = 'webp',
+    Docx = 'docx',
+    Pdf = 'pdf',
+    Html = 'html',
+    Doc = 'doc',
+    Xlsx = 'xlsx',
+    Xls = 'xls',
+    Pptx = 'pptx',
+    Ppt = 'ppt',
+}
+
+export type AssetUpsertWithNestedWhereUniqueInput = {
     /** Unique document search */
-    where: RecipeWhereUniqueInput;
+    where: AssetWhereUniqueInput;
     /** Upsert data */
-    data: RecipeUpsertInput;
+    data: AssetUpsertInput;
+};
+
+/** A connection to a list of items. */
+export type RecipeConnection = {
+    __typename?: 'RecipeConnection';
+    /** Information to aid in pagination. */
+    pageInfo: PageInfo;
+    /** A list of edges. */
+    edges: Array<RecipeEdge>;
+    aggregate: Aggregate;
+};
+
+export type UserLike = Node & {
+    __typename?: 'UserLike';
+    /** System stage field */
+    stage: Stage;
+    /** Get the document in other stages */
+    documentInStages: Array<UserLike>;
+    /** The unique identifier */
+    id: Scalars['ID'];
+    /** The time the document was created */
+    createdAt: Scalars['DateTime'];
+    /** The time the document was updated */
+    updatedAt: Scalars['DateTime'];
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['DateTime']>;
+    user?: Maybe<Scalars['String']>;
+    recipe?: Maybe<Recipe>;
+    /** List of UserLike versions */
+    history: Array<Version>;
+};
+
+export type UserLikeDocumentInStagesArgs = {
+    stages?: Array<Stage>;
+    includeCurrent?: Scalars['Boolean'];
+    inheritLocale?: Scalars['Boolean'];
+};
+
+export type UserLikeHistoryArgs = {
+    limit?: Scalars['Int'];
+    skip?: Scalars['Int'];
+    stageOverride?: Maybe<Stage>;
+};
+
+export type AssetCreateLocalizationDataInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    handle: Scalars['String'];
+    fileName: Scalars['String'];
+    height?: Maybe<Scalars['Float']>;
+    width?: Maybe<Scalars['Float']>;
+    size?: Maybe<Scalars['Float']>;
+    mimeType?: Maybe<Scalars['String']>;
 };
 
 /** Identifies documents */
@@ -2027,48 +1746,16 @@ export type UserLikeManyWhereInput = {
     recipe?: Maybe<RecipeWhereInput>;
 };
 
-/** Input for a geolocation point with latitude and longitude */
-export type LocationInput = {
-    latitude: Scalars['Float'];
-    longitude: Scalars['Float'];
-};
+export enum _MutationInputFieldKind {
+    Scalar = 'scalar',
+    RichText = 'richText',
+    Enum = 'enum',
+    Relation = 'relation',
+    Union = 'union',
+    Virtual = 'virtual',
+}
 
-export type DocumentVersion = {
-    __typename?: 'DocumentVersion';
-    id: Scalars['ID'];
-    stage: Stage;
-    revision: Scalars['Int'];
-    createdAt: Scalars['DateTime'];
-    data?: Maybe<Scalars['Json']>;
-};
-
-export type AssetUpdateManyInlineInput = {
-    /** Create and connect multiple Asset documents */
-    create?: Maybe<Array<AssetCreateInput>>;
-    /** Connect multiple existing Asset documents */
-    connect?: Maybe<Array<AssetConnectInput>>;
-    /** Override currently-connected documents with multiple existing Asset documents */
-    set?: Maybe<Array<AssetWhereUniqueInput>>;
-    /** Update multiple Asset documents */
-    update?: Maybe<Array<AssetUpdateWithNestedWhereUniqueInput>>;
-    /** Upsert multiple Asset documents */
-    upsert?: Maybe<Array<AssetUpsertWithNestedWhereUniqueInput>>;
-    /** Disconnect multiple Asset documents */
-    disconnect?: Maybe<Array<AssetWhereUniqueInput>>;
-    /** Delete multiple Asset documents */
-    delete?: Maybe<Array<AssetWhereUniqueInput>>;
-};
-
-/** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
-export type Rgba = {
-    __typename?: 'RGBA';
-    r: Scalars['RGBAHue'];
-    g: Scalars['RGBAHue'];
-    b: Scalars['RGBAHue'];
-    a: Scalars['RGBATransparency'];
-};
-
-export enum RecipeOrderByInput {
+export enum UserLikeOrderByInput {
     IdAsc = 'id_ASC',
     IdDesc = 'id_DESC',
     CreatedAtAsc = 'createdAt_ASC',
@@ -2077,22 +1764,49 @@ export enum RecipeOrderByInput {
     UpdatedAtDesc = 'updatedAt_DESC',
     PublishedAtAsc = 'publishedAt_ASC',
     PublishedAtDesc = 'publishedAt_DESC',
-    TitleAsc = 'title_ASC',
-    TitleDesc = 'title_DESC',
-    StatusAsc = 'status__ASC',
-    StatusDesc = 'status__DESC',
-    DescriptionAsc = 'description_ASC',
-    DescriptionDesc = 'description_DESC',
-    ContentAsc = 'content_ASC',
-    ContentDesc = 'content_DESC',
-    OwnerAsc = 'owner_ASC',
-    OwnerDesc = 'owner_DESC',
+    UserAsc = 'user_ASC',
+    UserDesc = 'user_DESC',
 }
 
-export enum _RelationInputCardinality {
-    One = 'one',
-    Many = 'many',
+export enum _SystemDateTimeFieldVariation {
+    Base = 'base',
+    Localization = 'localization',
+    Combined = 'combined',
 }
+
+/** Transformations for Assets */
+export type AssetTransformationInput = {
+    image?: Maybe<ImageTransformationInput>;
+    document?: Maybe<DocumentTransformationInput>;
+    /** Pass true if you want to validate the passed transformation parameters */
+    validateOptions?: Maybe<Scalars['Boolean']>;
+};
+
+/** Transformations for Images */
+export type ImageTransformationInput = {
+    /** Resizes the image */
+    resize?: Maybe<ImageResizeInput>;
+};
+
+export type RecipeCreateInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    title?: Maybe<Scalars['String']>;
+    status_?: Maybe<Scalars['String']>;
+    description?: Maybe<Scalars['String']>;
+    images?: Maybe<AssetCreateManyInlineInput>;
+    content?: Maybe<Scalars['String']>;
+    ingredients?: Maybe<Scalars['Json']>;
+    userLikes?: Maybe<UserLikeCreateOneInlineInput>;
+    owner?: Maybe<Scalars['String']>;
+};
+
+export type PublishLocaleInput = {
+    /** Locales to publish */
+    locale: Locale;
+    /** Stages to publish selected locales to */
+    stages: Array<Stage>;
+};
 
 export enum ImageFit {
     /** Resizes the image to fit within the specified parameters without distorting, cropping, or changing the aspect ratio. */
@@ -2104,6 +1818,70 @@ export enum ImageFit {
     /** Resizes the image to fit within the parameters, but as opposed to 'fit:clip' will not scale the image if the image is smaller than the output size. */
     Max = 'max',
 }
+
+export type AssetCreateLocalizationsInput = {
+    /** Create localizations for the newly-created document */
+    create?: Maybe<Array<AssetCreateLocalizationInput>>;
+};
+
+export type UserLikeUpdateManyInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    user?: Maybe<Scalars['String']>;
+};
+
+/** Input for a geolocation point with latitude and longitude */
+export type LocationInput = {
+    latitude: Scalars['Float'];
+    longitude: Scalars['Float'];
+};
+
+export type AssetUpdateManyWithNestedWhereInput = {
+    /** Document search */
+    where: AssetWhereInput;
+    /** Update many input */
+    data: AssetUpdateManyInput;
+};
+
+export type RecipeUpdateInput = {
+    title?: Maybe<Scalars['String']>;
+    status_?: Maybe<Scalars['String']>;
+    description?: Maybe<Scalars['String']>;
+    images?: Maybe<AssetUpdateManyInlineInput>;
+    content?: Maybe<Scalars['String']>;
+    ingredients?: Maybe<Scalars['Json']>;
+    userLikes?: Maybe<UserLikeUpdateOneInlineInput>;
+    owner?: Maybe<Scalars['String']>;
+};
+
+export type RecipeUpdateManyInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    title?: Maybe<Scalars['String']>;
+    status_?: Maybe<Scalars['String']>;
+    description?: Maybe<Scalars['String']>;
+    content?: Maybe<Scalars['String']>;
+    ingredients?: Maybe<Scalars['Json']>;
+    owner?: Maybe<Scalars['String']>;
+};
+
+export type UserLikeUpsertWithNestedWhereUniqueInput = {
+    /** Unique document search */
+    where: UserLikeWhereUniqueInput;
+    /** Upsert data */
+    data: UserLikeUpsertInput;
+};
+
+export type ConnectPositionInput = {
+    /** Connect document after specified document */
+    after?: Maybe<Scalars['ID']>;
+    /** Connect document before specified document */
+    before?: Maybe<Scalars['ID']>;
+    /** Connect document at first position */
+    start?: Maybe<Scalars['Boolean']>;
+    /** Connect document at last position */
+    end?: Maybe<Scalars['Boolean']>;
+};
 
 /** Asset system model */
 export type Asset = Node & {
@@ -2194,6 +1972,228 @@ export type AssetUrlArgs = {
     transformation?: Maybe<AssetTransformationInput>;
 };
 
+/** A connection to a list of items. */
+export type AssetConnection = {
+    __typename?: 'AssetConnection';
+    /** Information to aid in pagination. */
+    pageInfo: PageInfo;
+    /** A list of edges. */
+    edges: Array<AssetEdge>;
+    aggregate: Aggregate;
+};
+
+export type RecipeUpdateWithNestedWhereUniqueInput = {
+    /** Unique document search */
+    where: RecipeWhereUniqueInput;
+    /** Document to update */
+    data: RecipeUpdateInput;
+};
+
+/** A connection to a list of items. */
+export type UserLikeConnection = {
+    __typename?: 'UserLikeConnection';
+    /** Information to aid in pagination. */
+    pageInfo: PageInfo;
+    /** A list of edges. */
+    edges: Array<UserLikeEdge>;
+    aggregate: Aggregate;
+};
+
+export type AssetUpdateLocalizationDataInput = {
+    handle?: Maybe<Scalars['String']>;
+    fileName?: Maybe<Scalars['String']>;
+    height?: Maybe<Scalars['Float']>;
+    width?: Maybe<Scalars['Float']>;
+    size?: Maybe<Scalars['Float']>;
+    mimeType?: Maybe<Scalars['String']>;
+};
+
+export type RecipeConnectInput = {
+    /** Document to connect */
+    where: RecipeWhereUniqueInput;
+    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+    position?: Maybe<ConnectPositionInput>;
+};
+
+export type RecipeCreateOneInlineInput = {
+    /** Create and connect one Recipe document */
+    create?: Maybe<RecipeCreateInput>;
+    /** Connect one existing Recipe document */
+    connect?: Maybe<RecipeWhereUniqueInput>;
+};
+
+export type UserLikeUpdateManyWithNestedWhereInput = {
+    /** Document search */
+    where: UserLikeWhereInput;
+    /** Update many input */
+    data: UserLikeUpdateManyInput;
+};
+
+/** Representing a geolocation point with latitude and longitude */
+export type Location = {
+    __typename?: 'Location';
+    latitude: Scalars['Float'];
+    longitude: Scalars['Float'];
+    distance: Scalars['Float'];
+};
+
+/** Representing a geolocation point with latitude and longitude */
+export type LocationDistanceArgs = {
+    from: LocationInput;
+};
+
+export type AssetUpdateOneInlineInput = {
+    /** Create and connect one Asset document */
+    create?: Maybe<AssetCreateInput>;
+    /** Update single Asset document */
+    update?: Maybe<AssetUpdateWithNestedWhereUniqueInput>;
+    /** Upsert single Asset document */
+    upsert?: Maybe<AssetUpsertWithNestedWhereUniqueInput>;
+    /** Connect existing Asset document */
+    connect?: Maybe<AssetWhereUniqueInput>;
+    /** Disconnect currently connected Asset document */
+    disconnect?: Maybe<Scalars['Boolean']>;
+    /** Delete currently connected Asset document */
+    delete?: Maybe<Scalars['Boolean']>;
+};
+
+export type Recipe = Node & {
+    __typename?: 'Recipe';
+    /** System stage field */
+    stage: Stage;
+    /** Get the document in other stages */
+    documentInStages: Array<Recipe>;
+    /** The unique identifier */
+    id: Scalars['ID'];
+    /** The time the document was created */
+    createdAt: Scalars['DateTime'];
+    /** The time the document was updated */
+    updatedAt: Scalars['DateTime'];
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['DateTime']>;
+    title?: Maybe<Scalars['String']>;
+    status_?: Maybe<Scalars['String']>;
+    description?: Maybe<Scalars['String']>;
+    images: Array<Asset>;
+    content?: Maybe<Scalars['String']>;
+    ingredients?: Maybe<Scalars['Json']>;
+    userLikes?: Maybe<UserLike>;
+    owner?: Maybe<Scalars['String']>;
+    /** List of Recipe versions */
+    history: Array<Version>;
+};
+
+export type RecipeDocumentInStagesArgs = {
+    stages?: Array<Stage>;
+    includeCurrent?: Scalars['Boolean'];
+    inheritLocale?: Scalars['Boolean'];
+};
+
+export type RecipeImagesArgs = {
+    where?: Maybe<AssetWhereInput>;
+    orderBy?: Maybe<AssetOrderByInput>;
+    skip?: Maybe<Scalars['Int']>;
+    after?: Maybe<Scalars['String']>;
+    before?: Maybe<Scalars['String']>;
+    first?: Maybe<Scalars['Int']>;
+    last?: Maybe<Scalars['Int']>;
+};
+
+export type RecipeHistoryArgs = {
+    limit?: Scalars['Int'];
+    skip?: Scalars['Int'];
+    stageOverride?: Maybe<Stage>;
+};
+
+export type UserLikeUpdateWithNestedWhereUniqueInput = {
+    /** Unique document search */
+    where: UserLikeWhereUniqueInput;
+    /** Document to update */
+    data: UserLikeUpdateInput;
+};
+
+export enum _OrderDirection {
+    Asc = 'asc',
+    Desc = 'desc',
+}
+
+export type AssetUpdateManyLocalizationInput = {
+    fileName: Scalars['String'];
+    height?: Maybe<Scalars['Float']>;
+    width?: Maybe<Scalars['Float']>;
+    size?: Maybe<Scalars['Float']>;
+    mimeType?: Maybe<Scalars['String']>;
+};
+
+export type Version = {
+    __typename?: 'Version';
+    id: Scalars['ID'];
+    stage: Stage;
+    revision: Scalars['Int'];
+    createdAt: Scalars['DateTime'];
+};
+
+export type UserLikeConnectInput = {
+    /** Document to connect */
+    where: UserLikeWhereUniqueInput;
+    /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+    position?: Maybe<ConnectPositionInput>;
+};
+
+export type VersionWhereInput = {
+    id: Scalars['ID'];
+    stage: Stage;
+    revision: Scalars['Int'];
+};
+
+export type AssetUpdateLocalizationsInput = {
+    /** Localizations to create */
+    create?: Maybe<Array<AssetCreateLocalizationInput>>;
+    /** Localizations to update */
+    update?: Maybe<Array<AssetUpdateLocalizationInput>>;
+    upsert?: Maybe<Array<AssetUpsertLocalizationInput>>;
+    /** Localizations to delete */
+    delete?: Maybe<Array<Locale>>;
+};
+
+export type RecipeUpsertWithNestedWhereUniqueInput = {
+    /** Unique document search */
+    where: RecipeWhereUniqueInput;
+    /** Upsert data */
+    data: RecipeUpsertInput;
+};
+
+export type AssetUpdateLocalizationInput = {
+    data: AssetUpdateLocalizationDataInput;
+    locale: Locale;
+};
+
+/** Information about pagination in a connection. */
+export type PageInfo = {
+    __typename?: 'PageInfo';
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']>;
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']>;
+};
+
+export type AssetCreateLocalizationInput = {
+    /** Localization input */
+    data: AssetCreateLocalizationDataInput;
+    locale: Locale;
+};
+
+export type AssetUpdateManyInput = {
+    createdAt?: Maybe<Scalars['DateTime']>;
+    updatedAt?: Maybe<Scalars['DateTime']>;
+    /** Optional updates to localizations */
+    localizations?: Maybe<Array<AssetUpdateManyLocalizationInput>>;
+};
+
 export type CreateRecipeGraphQlMutationVariables = Exact<{
     data: RecipeCreateInput;
 }>;
@@ -2261,7 +2261,10 @@ export type RecipeGraphQlQueryVariables = Exact<{
 
 export type RecipeGraphQlQuery = { __typename?: 'Query' } & {
     recipe?: Maybe<
-        { __typename?: 'Recipe' } & Pick<Recipe, 'id' | 'status_' | 'title' | 'content' | 'description' | 'ingredients' | 'owner'> & {
+        { __typename?: 'Recipe' } & Pick<
+            Recipe,
+            'id' | 'status_' | 'title' | 'content' | 'description' | 'ingredients' | 'createdAt' | 'owner'
+        > & {
                 userLikes?: Maybe<{ __typename?: 'UserLike' } & Pick<UserLike, 'id' | 'user'>>;
                 images: Array<{ __typename?: 'Asset' } & Pick<Asset, 'id' | 'fileName' | 'height' | 'width' | 'size' | 'handle'>>;
             }
@@ -2840,6 +2843,7 @@ export const RecipeGraphQlDocument = gql`
             content
             description
             ingredients
+            createdAt
             userLikes {
                 id
                 user

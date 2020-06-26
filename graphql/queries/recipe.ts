@@ -9,6 +9,7 @@ export const recipeGraphQL = gql`
             content
             description
             ingredients
+            createdAt
             userLikes {
                 id
                 user
