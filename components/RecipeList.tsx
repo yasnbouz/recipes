@@ -6,6 +6,8 @@ import Error from './notify/Error';
 import Loading from './notify/Loading';
 import Warning from './notify/Warning';
 import RecipeListItem from './RecipeListItem';
+import styled from 'styled-components';
+
 export enum queryEnum {
     userLikes = 'userLikes',
     recipes = 'recipes',
@@ -25,10 +27,16 @@ export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps)
     if (error || !recipesList) return <Error errorText={`${error}`} />;
     if (recipesList.length === 0) return <Warning warnHeader="No Recipes" warnText="No recipes are present, why not add one?" />;
     return (
-        <Row gutter={16} style={{ margin: 'auto' }}>
+        <StyledRow gutter={16} style={{ margin: 'auto' }}>
             {recipesList.map((recipe: Recipe) => (
                 <RecipeListItem key={`${recipe.id}-${queryType}`} recipe={recipe} parentRoute={parentRoute} />
             ))}
-        </Row>
+        </StyledRow>
     );
 };
+
+const StyledRow = styled(Row)`
+    ${({ theme }) => `
+        padding:${theme['padding_sm']};
+    `};
+`;
