@@ -6,6 +6,7 @@ import { RecipeGraphQlDocument, RecipesIDsGraphQlDocument, useRecipeGraphQlQuery
 import Loading from 'components/notify/Loading';
 import Error from 'components/notify/Error';
 import MainLayout from 'components/layout/MainLayout';
+import OneRecipe from 'components/OneRecipe';
 
 export default function RecipePage() {
     const {
@@ -28,7 +29,7 @@ export default function RecipePage() {
         );
     return (
         <MainLayout title={title}>
-            <h2>{title}</h2>
+            <OneRecipe recipe={data.recipe} />
         </MainLayout>
     );
 }
