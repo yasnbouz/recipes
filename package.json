@@ -11,6 +11,18 @@
         "lint": "eslint ./**/*.{js,jsx,ts,tsx}",
         "lint:fix": "yarn lint -- --fix"
     },
+    "lint-staged": {
+        "*.{html,md,mdx,ts,tsx,js,jsx,json,yml}": [
+            "yarn lint:fix",
+            "yarn format",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "dependencies": {
         "@ant-design/icons": "^4.2.1",
         "@apollo/react-components": "^3.1.5",
@@ -53,6 +65,8 @@
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-react": "^7.20.0",
         "eslint-plugin-react-hooks": "^4.0.4",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.11",
         "prettier": "^2.0.5",
         "typescript": "^3.9.5"
     }
