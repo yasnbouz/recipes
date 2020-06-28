@@ -27,7 +27,7 @@ export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps)
     if (error || !recipesList) return <Error errorText={`${error}`} />;
     if (recipesList.length === 0) return <Warning warnHeader="No Recipes" warnText="No recipes are present, why not add one?" />;
     return (
-        <StyledRow gutter={16} style={{ margin: 'auto' }}>
+        <StyledRow gutter={16}>
             {recipesList.map((recipe: Recipe) => (
                 <RecipeListItem key={`${recipe.id}-${queryType}`} recipe={recipe} parentRoute={parentRoute} />
             ))}
