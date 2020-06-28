@@ -64,11 +64,18 @@ export default function MainNavBar() {
                     </Link>
                 </Menu.Item>
                 {user && !loading ? (
-                    <Menu.Item key="logout">
-                        <Link href="/api/logout">
-                            <a>Logout</a>
-                        </Link>
-                    </Menu.Item>
+                    [
+                        <Menu.Item key="my-recipes">
+                            <Link href="/my-recipes">
+                                <a>My Recipes</a>
+                            </Link>
+                        </Menu.Item>,
+                        <Menu.Item key="logout">
+                            <Link href="/api/logout">
+                                <a>Logout</a>
+                            </Link>
+                        </Menu.Item>,
+                    ]
                 ) : (
                     <Menu.Item key="login">
                         <Link href="/api/login">
