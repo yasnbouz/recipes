@@ -4,6 +4,7 @@ import EllipsisText from 'react-ellipsis-text';
 import { Recipe } from 'generated/apollo-components';
 import { Col } from 'antd';
 import styled from 'styled-components';
+import LikeButton from './LikeButton';
 const StyledRecipe = styled(Col)`
     ${({ theme }) => `
         padding:0 ${theme['padding_sm']} !important;
@@ -33,9 +34,13 @@ const StyledRecipe = styled(Col)`
         }
     `}
 `;
-
-export default function RecipeListItem({ recipe, parentRoute }: { recipe: Recipe; parentRoute: string }) {
+type RecipeListItemProps = {
+    recipe: Recipe;
+    parentRoute: string;
+};
+export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemProps) {
     const { title, description, images, id, userLikes } = recipe;
+
     return (
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <div className="card">
@@ -43,7 +48,10 @@ export default function RecipeListItem({ recipe, parentRoute }: { recipe: Recipe
                     <div>{images ? <GraphImg image={images[0]} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
-                    <h3>{title}</h3>
+                    <h3>
+                        <EllipsisText text={title} length={28} />
+                        <LikeButton recipeId={id} userLikes={userLikes} />
+                    </h3>
                     <p>
                         <EllipsisText text={description} length={110} />
                     </p>

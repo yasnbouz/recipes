@@ -5,10 +5,11 @@ import { generateUnit } from 'utils/generateUnit';
 import { generateDate } from 'utils/generateDate';
 import ReactMarkdown from 'react-markdown';
 import { CalendarOutlined } from '@ant-design/icons';
+import LikeButton from './LikeButton';
 const { Title, Text, Paragraph } = Typography;
 
 export default function OneRecipe({ recipe }) {
-    const { title, description, content, ingredients, images, status_, userLikes, owner, createdAt } = recipe;
+    const { id, title, description, content, ingredients, images, userLikes, owner, createdAt } = recipe;
     const recipeCreatedAt = generateDate(createdAt);
     return (
         <Row>
@@ -20,9 +21,12 @@ export default function OneRecipe({ recipe }) {
                 </Row>
                 <Row>
                     <Col span={20} offset={2}>
-                        <h1>{recipe.title}</h1>
+                        <h1>
+                            {recipe.title}
+                            <LikeButton recipeId={id} userLikes={userLikes} />
+                        </h1>
                         <Paragraph className="createdAt">
-                            <CalendarOutlined /> {`${recipeCreatedAt} ${owner ? `by ${owner}` : ''}`}
+                            <CalendarOutlined /> {recipeCreatedAt}
                         </Paragraph>
                         <Paragraph>{description}</Paragraph>
                     </Col>

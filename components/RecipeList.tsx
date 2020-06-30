@@ -38,5 +38,6 @@ export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps)
 const StyledRow = styled(Row)`
     ${({ theme }) => `
         padding:${theme['padding_sm']};
+        margin:0 !important;
     `};
 `;

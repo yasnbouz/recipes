@@ -4,12 +4,17 @@ import { useFetchUser } from 'lib/user';
 import { get } from 'lodash';
 import { Row, Col, Typography } from 'antd';
 import styled from 'styled-components';
-
+import Router from 'next/router';
+import Loading from 'components/notify/Loading';
 const { Title } = Typography;
-const Home = () => {
+const MyRecipes = () => {
     const { user, loading } = useFetchUser();
     const owner = get(user, 'sub');
     const options = owner ? { variables: { where: { owner } } } : {};
+    if (loading) return <Loading />;
+    if (!user) {
+        Router.replace('/');
+    }
     return (
         <MainLayout title="My Recipes">
             <StyledRow>
@@ -22,7 +27,7 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default MyRecipes;
 
 const StyledRow = styled(Row)`
     ${({ theme }) => `
