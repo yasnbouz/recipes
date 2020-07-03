@@ -29,7 +29,7 @@ const MyRecipes = () => {
 
 export default MyRecipes;
 
-const StyledRow = styled(Row)`
+export const StyledRow = styled(Row)`
     ${({ theme }) => `
         padding:8px;
         h1{

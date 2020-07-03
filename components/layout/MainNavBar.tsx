@@ -70,6 +70,11 @@ export default function MainNavBar() {
                                 <a>My Recipes</a>
                             </Link>
                         </Menu.Item>,
+                        <Menu.Item key="favorites">
+                            <Link href="/favorites">
+                                <a>Favorites</a>
+                            </Link>
+                        </Menu.Item>,
                         <Menu.Item key="logout">
                             <Link href="/api/logout">
                                 <a>Logout</a>
