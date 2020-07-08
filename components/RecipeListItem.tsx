@@ -45,7 +45,7 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <div className="card">
                 <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`} passHref>
-                    <div>{images ? <GraphImg image={images[0]} alt={title} /> : null}</div>
+                    <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
                     <h3>

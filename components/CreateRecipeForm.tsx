@@ -6,7 +6,7 @@ const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 type RecipeFormProps = {
     form?: FormInstance;
-    ingredients: { key: number; amount: string; unit: string; type: string }[];
+    ingredients: { amount: string; unit: string; type: string }[];
     status: string;
     handleAddIngredient: (event: any) => void;
     handleDeleteIngredient: (key: number) => void;
@@ -14,6 +14,7 @@ type RecipeFormProps = {
     handleDropDownUnitChange?: (item: string, index: number) => void;
     handleDropDownStatusChange: (event: any) => void;
     onFinish: (values: any) => void;
+    loading: boolean;
 };
 
 export default function CreateRecipeForm({
@@ -26,6 +27,7 @@ export default function CreateRecipeForm({
     handleDropDownUnitChange,
     handleInputChange,
     handleDropDownStatusChange,
+    loading,
 }: RecipeFormProps) {
     return (
         <Form
@@ -33,7 +35,7 @@ export default function CreateRecipeForm({
             name="create-recipe-form"
             form={form}
             onFinish={onFinish}
-            initialValues={{ title: '', description: '', content: '', ingredients, status }}
+            initialValues={{ title: '', description: '', content: '', ingredients, status_: status }}
         >
             <GenerateInput name="title" />
             <GenerateInput name="description" />
@@ -47,16 +49,32 @@ export default function CreateRecipeForm({
                 handleInputChange={handleInputChange}
             />
             <Row>
-                <GenerateDropDown name="status" status={status} handleDropDownChange={handleDropDownStatusChange} statusList={statusList} />
+                <GenerateDropDown
+                    name="status_"
+                    label="status"
+                    status={status}
+                    handleDropDownChange={handleDropDownStatusChange}
+                    statusList={statusList}
+                />
                 <Col span={16} />
-                <Col span={4}>
+                <Col xs={{ pull: 4 }} sm={{ pull: 0 }} span={4}>
                     <Form.Item label="Create Recipe">
-                        <Button type="primary" htmlType="submit">
+                        <Button disabled={loading} type="primary" htmlType="submit">
                             Create Recipe
                         </Button>
                     </Form.Item>
                 </Col>
             </Row>
+            <style global jsx>
+                {`
+                    .ant-form .ant-form-item .ant-form-item-label,
+                    .ant-form .ant-form-item .ant-form-item-control {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                        text-align: left;
+                    }
+                `}
+            </style>
         </Form>
     );
 }

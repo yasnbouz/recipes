@@ -2,21 +2,29 @@ import { Form } from 'antd';
 import { useState } from 'react';
 import _sortBy from 'lodash/sortBy';
 import _filter from 'lodash/filter';
+import _get from 'lodash/get';
 import CreateRecipeForm from './CreateRecipeForm';
+import { useFetchUser } from 'lib/user';
+import Loading from './notify/Loading';
+import Router from 'next/router';
+import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generated/apollo-components';
 
 export default function CreateRecipe() {
     const [form] = Form.useForm();
     const [status, setStatus] = useState('--choose--');
     const [ingredients, setIngredients] = useState([]);
+    const { user, loading: isFetchingUser } = useFetchUser();
+    const owner = _get(user, 'sub') || '';
 
+    const [createRecipeMutation, { loading }] = useCreateRecipeGraphQlMutation();
     const onFinish = (values) => {
-        console.log(values);
-        // form.resetFields();
+        createRecipeMutation({ variables: { data: { ...values, owner } }, refetchQueries: [{ query: RecipesGraphQlDocument }] });
+        setIngredients([]);
+        form.resetFields();
     };
     const handleDropDownStatusChange = (item) => {
-        form.setFieldsValue({ status: item });
+        form.setFieldsValue({ status_: item });
         setStatus(item);
-        console.log(form.getFieldsValue());
     };
     const handleAddIngredient = () => {
         const sortedIngredients = _sortBy(ingredients, ['key']);
@@ -49,7 +57,12 @@ export default function CreateRecipe() {
         setIngredients(newIngredients);
         form.setFieldsValue({ ingredients: newIngredients });
     };
-
+    if (isFetchingUser) {
+        return <Loading />;
+    }
+    if (!user) {
+        Router.replace('/');
+    }
     return (
         <CreateRecipeForm
             form={form}
@@ -61,6 +74,7 @@ export default function CreateRecipe() {
             handleDropDownUnitChange={handleDropDownUnitChange}
             handleInputChange={handleInputChange}
             handleDropDownStatusChange={handleDropDownStatusChange}
+            loading={loading}
         />
     );
 }

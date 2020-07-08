@@ -66,7 +66,9 @@ export const GenerateIngredients = ({
             {values.length > 0 && (
                 <Row>
                     <Col span={12} offset={6}>
-                        <Table pagination={{ pageSize: 10 }} dataSource={values} columns={columns} />
+                        <Form.Item name="ingredients">
+                            <Table pagination={{ pageSize: 10 }} dataSource={values} columns={columns} />
+                        </Form.Item>
                     </Col>
                 </Row>
             )}

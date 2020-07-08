@@ -22,13 +22,14 @@ export const GenerateTextInput = ({ name }: { name: string }) => (
 );
 type DropDownProps = {
     name: string;
+    label: string;
     status: string;
     statusList: string[];
     handleDropDownChange: (value: string) => void;
 };
-export const GenerateDropDown = ({ name, status, statusList, handleDropDownChange }: DropDownProps) => (
+export const GenerateDropDown = ({ name, label, status, statusList, handleDropDownChange }: DropDownProps) => (
     <Col span={4} offset={6}>
-        <Form.Item label={`${name}`} name={`${name}`}>
+        <Form.Item label={`${label}`} name={`${name}`}>
             <Dropdown
                 overlay={<MenuList handleDropDownChange={handleDropDownChange} iterableList={statusList} />}
                 placement="bottomLeft"
