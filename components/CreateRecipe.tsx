@@ -57,6 +57,11 @@ export default function CreateRecipe() {
         setIngredients(newIngredients);
         form.setFieldsValue({ ingredients: newIngredients });
     };
+    const handleSubmitImages = (images) => {
+        form.setFieldsValue({ images });
+        console.log(form.getFieldsValue());
+        console.log(images);
+    };
     if (isFetchingUser) {
         return <Loading />;
     }
@@ -74,6 +79,7 @@ export default function CreateRecipe() {
             handleDropDownUnitChange={handleDropDownUnitChange}
             handleInputChange={handleInputChange}
             handleDropDownStatusChange={handleDropDownStatusChange}
+            handleSubmitImages={handleSubmitImages}
             loading={loading}
         />
     );

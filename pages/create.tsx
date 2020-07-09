@@ -1,6 +1,6 @@
 import MainLayout from 'components/layout/MainLayout';
-import { StyledRow } from './my-recipes/index';
-import { Col } from 'antd';
+import styled from 'styled-components';
+import { Col, Row } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import CreateRecipe from 'components/CreateRecipe';
 const Create = () => {
@@ -15,5 +15,14 @@ const Create = () => {
         </MainLayout>
     );
 };
+
+export const StyledRow = styled(Row)`
+    padding: 8px;
+    h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 2em;
+    }
+`;
 
 export default Create;

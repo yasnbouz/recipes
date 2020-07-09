@@ -2,6 +2,7 @@ import { Form, Button, Row, Col } from 'antd';
 import { GenerateInput, GenerateTextInput, GenerateDropDown } from './GenerateFields';
 import { GenerateIngredients } from './GenerateIngredients';
 import { FormInstance } from 'antd/lib/form';
+import PictureUploader from './PictureUploader';
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 type RecipeFormProps = {
@@ -14,6 +15,7 @@ type RecipeFormProps = {
     handleDropDownUnitChange?: (item: string, index: number) => void;
     handleDropDownStatusChange: (event: any) => void;
     onFinish: (values: any) => void;
+    handleSubmitImages: (images: any) => void;
     loading: boolean;
 };
 
@@ -27,6 +29,7 @@ export default function CreateRecipeForm({
     handleDropDownUnitChange,
     handleInputChange,
     handleDropDownStatusChange,
+    handleSubmitImages,
     loading,
 }: RecipeFormProps) {
     return (
@@ -35,7 +38,7 @@ export default function CreateRecipeForm({
             name="create-recipe-form"
             form={form}
             onFinish={onFinish}
-            initialValues={{ title: '', description: '', content: '', ingredients, status_: status }}
+            initialValues={{ title: '', description: '', content: '', ingredients, status_: status, images: {} }}
         >
             <GenerateInput name="title" />
             <GenerateInput name="description" />
@@ -49,6 +52,11 @@ export default function CreateRecipeForm({
                 handleInputChange={handleInputChange}
             />
             <Row>
+                <Col span={12} offset={6}>
+                    <Form.Item label="Upload Image" name="images">
+                        <PictureUploader handleSubmitImages={handleSubmitImages} />
+                    </Form.Item>
+                </Col>
                 <GenerateDropDown
                     name="status_"
                     label="status"
@@ -56,8 +64,7 @@ export default function CreateRecipeForm({
                     handleDropDownChange={handleDropDownStatusChange}
                     statusList={statusList}
                 />
-                <Col span={16} />
-                <Col xs={{ pull: 4 }} sm={{ pull: 0 }} span={4}>
+                <Col span={12} offset={6}>
                     <Form.Item label="Create Recipe">
                         <Button disabled={loading} type="primary" htmlType="submit">
                             Create Recipe
