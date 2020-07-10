@@ -11,7 +11,7 @@ import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generate
 
 export default function CreateRecipe() {
     const [form] = Form.useForm();
-    const [status, setStatus] = useState('--choose--');
+    const [status, setStatus] = useState('DRAFT');
     const [ingredients, setIngredients] = useState([]);
     const { user, loading: isFetchingUser } = useFetchUser();
     const owner = _get(user, 'sub') || '';
@@ -71,6 +71,7 @@ export default function CreateRecipe() {
     return (
         <CreateRecipeForm
             form={form}
+            initialValues={{ title: '', description: '', content: '', ingredients, status_: status, images: {} }}
             onFinish={onFinish}
             ingredients={ingredients}
             status={status}

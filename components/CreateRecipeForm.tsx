@@ -17,6 +17,7 @@ type RecipeFormProps = {
     onFinish: (values: any) => void;
     handleSubmitImages: (images: any) => void;
     loading: boolean;
+    initialValues: object;
 };
 
 export default function CreateRecipeForm({
@@ -31,15 +32,10 @@ export default function CreateRecipeForm({
     handleDropDownStatusChange,
     handleSubmitImages,
     loading,
+    initialValues,
 }: RecipeFormProps) {
     return (
-        <Form
-            layout="horizontal"
-            name="create-recipe-form"
-            form={form}
-            onFinish={onFinish}
-            initialValues={{ title: '', description: '', content: '', ingredients, status_: status, images: {} }}
-        >
+        <Form layout="horizontal" name="create-recipe-form" form={form} onFinish={onFinish} initialValues={initialValues}>
             <GenerateInput name="title" />
             <GenerateInput name="description" />
             <GenerateTextInput name="content" />

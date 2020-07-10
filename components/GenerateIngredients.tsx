@@ -33,7 +33,7 @@ export const GenerateIngredients = ({
                         <Button>{record[name]}</Button>
                     </Dropdown>
                 ) : (
-                    <Input placeholder={name} data-index={index} name={name} onChange={handleInputChange} />
+                    <Input placeholder={name} data-index={index} defaultValue={record[name]} name={name} onChange={handleInputChange} />
                 );
             },
         }))
