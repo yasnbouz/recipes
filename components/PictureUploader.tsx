@@ -13,7 +13,6 @@ export default function PictureUploader({ handleSubmitImages }: { handleSubmitIm
         onChange: async (info) => {
             if (info.file.status === 'done') {
                 const { size, type, filename } = info.file.response;
-                console.log(size, type, filename);
                 const img = new Image();
 
                 img.onload = function () {
@@ -39,7 +38,6 @@ export default function PictureUploader({ handleSubmitImages }: { handleSubmitIm
             }
         },
     };
-    console.log(APIKEY, APIURL, CDNBASE);
     return (
         <Upload {...uploadProps}>
             <Button>

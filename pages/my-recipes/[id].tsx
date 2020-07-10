@@ -8,7 +8,6 @@ export default function MyRecipe() {
     const {
         query: { id },
     } = useRouter();
-    console.log(id);
     return (
         <MainLayout title="Update Recipe">
             <StyledRow>
