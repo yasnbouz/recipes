@@ -27,7 +27,7 @@ const MyRecipes = () => {
                     </Link>
                 </Col>
             </StyledRow>
-            <RecipeList parentRoute="recipe" queryType={queryEnum.recipes} options={options} />
+            <RecipeList parentRoute="my-recipes" queryType={queryEnum.recipes} options={options} />
         </MainLayout>
     );
 };
