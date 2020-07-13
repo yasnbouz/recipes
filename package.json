@@ -14,8 +14,7 @@
     "lint-staged": {
         "*.{html,md,mdx,ts,tsx,js,jsx,json,yml}": [
             "yarn lint:fix",
-            "yarn format",
-            "git add"
+            "yarn format"
         ]
     },
     "husky": {
