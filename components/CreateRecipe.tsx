@@ -4,9 +4,11 @@ import { useFetchUser } from 'lib/user';
 import Loading from './notify/Loading';
 import Router from 'next/router';
 import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generated/apollo-components';
-import { submitForm } from 'utils/submitForm';
+import { useSubmitForm } from 'utils/submitForm';
+import { Form } from 'antd';
 
 export default function CreateRecipe() {
+    const [form] = Form.useForm();
     const { user, loading: isFetchingUser } = useFetchUser();
     const owner = _get(user, 'sub') || '';
 
@@ -15,7 +17,6 @@ export default function CreateRecipe() {
         createRecipeMutation({ variables: { data: { ...values, owner } }, refetchQueries: [{ query: RecipesGraphQlDocument }] });
     };
     const {
-        form,
         initialValues,
         ingredients,
         status,
@@ -26,7 +27,8 @@ export default function CreateRecipe() {
         handleInputChange,
         handleSubmitImages,
         onCreateFinish,
-    } = submitForm(
+    } = useSubmitForm(
+        form,
         {
             title: '',
             description: '',
