@@ -8,8 +8,8 @@ export const useSubmitForm = (form, initialValues, callback) => {
 
     const onUpdateFinish = (values) => {
         callback(values);
-        setIngredients([]);
-        form.resetFields();
+        // setIngredients([]);
+        // form.resetFields();
     };
     const onCreateFinish = (values) => {
         callback(values);

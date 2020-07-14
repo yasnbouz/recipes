@@ -3,6 +3,7 @@ import { GenerateInput, GenerateTextInput, GenerateDropDown } from './GenerateFi
 import { GenerateIngredients } from './GenerateIngredients';
 import { FormInstance } from 'antd/lib/form';
 import PictureUploader from './PictureUploader';
+import { useState } from 'react';
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 type RecipeFormProps = {
@@ -34,6 +35,8 @@ export default function CreateRecipeForm({
     loading,
     initialValues,
 }: RecipeFormProps) {
+    const [recipeState, setRecipeState] = useState({ isPicUploading: false });
+
     return (
         <Form layout="horizontal" name="create-recipe-form" form={form} onFinish={onFinish} initialValues={initialValues}>
             <GenerateInput name="title" />
@@ -50,7 +53,7 @@ export default function CreateRecipeForm({
             <Row>
                 <Col span={12} offset={6}>
                     <Form.Item label="Upload Image" name="images">
-                        <PictureUploader handleSubmitImages={handleSubmitImages} />
+                        <PictureUploader handleSubmitImages={handleSubmitImages} setRecipeState={setRecipeState} />
                     </Form.Item>
                 </Col>
                 <GenerateDropDown
@@ -62,7 +65,7 @@ export default function CreateRecipeForm({
                 />
                 <Col span={12} offset={6}>
                     <Form.Item label="Create Recipe">
-                        <Button disabled={loading} type="primary" htmlType="submit">
+                        <Button disabled={loading || recipeState.isPicUploading} type="primary" htmlType="submit">
                             Create Recipe
                         </Button>
                     </Form.Item>

@@ -1,20 +1,51 @@
 import { useState } from 'react';
-import { useRecipeGraphQlQuery } from 'generated/apollo-components';
+import {
+    useRecipeGraphQlQuery,
+    useUpdateRecipeGraphQlMutation,
+    RecipeGraphQlDocument,
+    useDeleteAssetGraphQlMutation,
+} from 'generated/apollo-components';
 import { useSubmitForm } from 'utils/submitForm';
 import { Form, Row, Col, Button } from 'antd';
 import _get from 'lodash/get';
+import _isNil from 'lodash/isNil';
+import _isEmpty from 'lodash/isEmpty';
 import { GenerateInput, GenerateTextInput, GenerateDropDown } from './GenerateFields';
 import { GenerateIngredients } from './GenerateIngredients';
 import PictureUploader from './PictureUploader';
 import Loading from './notify/Loading';
+import { createUpdateObj } from 'utils/createUpdateObj';
+import GraphImg from 'graphcms-image';
+
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 export default function UpdateRecipe({ id }: { id: string }) {
     const { data, loading: isQueryLoading, error } = useRecipeGraphQlQuery({ variables: { where: { id } } });
+    const [UpdateRecipeMutation, { loading: updateRecipeLoading }] = useUpdateRecipeGraphQlMutation();
+    const [deleteAssetMutation, { loading: deleteAssetLoading }] = useDeleteAssetGraphQlMutation();
     const [form] = Form.useForm();
-    const [recipeState, setRecipeState] = useState({ isQueryLoading });
-    const onFinish = (values) => {
-        // console.log(values);
+    const [recipeState, setRecipeState] = useState({ isQueryLoading, isPicUploading: false });
+
+    const onFinish = async (values) => {
+        // update image
+        const { handle: queryImageHandle, id: idImg } = _get(data, 'recipe.images[0]', {});
+        const formImageHandle = _get(values, 'images.create[0].handle');
+
+        if (queryImageHandle !== formImageHandle && !_isNil(formImageHandle) && !_isNil(queryImageHandle)) {
+            await deleteAssetMutation({ variables: { where: { id: idImg } } });
+        }
+        const updateObj = createUpdateObj(data, values);
+        if (!_isEmpty(updateObj)) {
+            await UpdateRecipeMutation({
+                refetchQueries: [{ query: RecipeGraphQlDocument, variables: { where: { id } } }],
+                variables: {
+                    data: {
+                        ...updateObj,
+                    },
+                    where: { id },
+                },
+            });
+        }
     };
     const {
         initialValues,
@@ -48,10 +79,10 @@ export default function UpdateRecipe({ id }: { id: string }) {
         });
         setRecipeState((state) => ({ ...state, isQueryLoading }));
     }
-
     if (!data) return <Loading />;
+    const disabled = updateRecipeLoading || updateRecipeLoading || deleteAssetLoading || recipeState.isPicUploading;
     return (
-        <Form layout="horizontal" name="create-recipe-form" form={form} onFinish={onUpdateFinish} initialValues={initialValues}>
+        <Form layout="horizontal" name="update-recipe-form" form={form} onFinish={onUpdateFinish} initialValues={initialValues}>
             <GenerateInput name="title" />
             <GenerateInput name="description" />
             <GenerateTextInput name="content" />
@@ -66,8 +97,9 @@ export default function UpdateRecipe({ id }: { id: string }) {
             <Row>
                 <Col span={12} offset={6}>
                     <Form.Item label="Upload Image" name="images">
-                        <PictureUploader handleSubmitImages={handleSubmitImages} />
+                        <PictureUploader handleSubmitImages={handleSubmitImages} setRecipeState={setRecipeState} />
                     </Form.Item>
+                    {data.recipe.images ? <GraphImg image={data.recipe.images[0] || {}} alt={data.recipe.title} /> : null}
                 </Col>
                 <GenerateDropDown
                     name="status_"
@@ -78,12 +110,13 @@ export default function UpdateRecipe({ id }: { id: string }) {
                 />
                 <Col span={12} offset={6}>
                     <Form.Item label="Update Recipe">
-                        <Button disabled={isQueryLoading} type="primary" htmlType="submit">
+                        <Button disabled={disabled} type="primary" htmlType="submit">
                             Update Recipe
                         </Button>
                     </Form.Item>
                 </Col>
             </Row>
+
             <style global jsx>
                 {`
                     .ant-form .ant-form-item .ant-form-item-label,
@@ -91,6 +124,9 @@ export default function UpdateRecipe({ id }: { id: string }) {
                         flex: 0 0 100%;
                         max-width: 100%;
                         text-align: left;
+                    }
+                    .graphcms-image-wrapper {
+                        max-width: 300px;
                     }
                 `}
             </style>

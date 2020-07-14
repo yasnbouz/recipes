@@ -1,8 +1,20 @@
 import _get from 'lodash/get';
 import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { Dispatch, SetStateAction } from 'react';
 
-export default function PictureUploader({ handleSubmitImages }: { handleSubmitImages: (images: any) => void }) {
+export default function PictureUploader({
+    handleSubmitImages,
+    setRecipeState,
+}: {
+    handleSubmitImages: (images: any) => void;
+    setRecipeState: Dispatch<
+        SetStateAction<{
+            isQueryLoading: boolean;
+            isPicUploading: boolean;
+        }>
+    >;
+}) {
     const APIKEY = process.env.NEXT_PUBLIC_APIKEY;
     const APIURL = process.env.NEXT_PUBLIC_APIURL;
     const CDNBASE = process.env.NEXT_PUBLIC_CDNBASE;
@@ -11,6 +23,9 @@ export default function PictureUploader({ handleSubmitImages }: { handleSubmitIm
         action: `${APIURL}?key=${APIKEY}`,
         data: (file) => ({ fileUpload: file }),
         onChange: async (info) => {
+            if (info.file.status === 'uploading') {
+                setRecipeState((state) => ({ ...state, isPicUploading: true }));
+            }
             if (info.file.status === 'done') {
                 const { size, type, filename } = info.file.response;
                 const img = new Image();
@@ -30,10 +45,12 @@ export default function PictureUploader({ handleSubmitImages }: { handleSubmitIm
                             },
                         ],
                     });
+                    setRecipeState((state) => ({ ...state, isPicUploading: false }));
                 };
                 img.src = info.file.response.url;
                 message.success(`${info.file.name} file uploaded successfully`);
             } else if (info.file.status === 'error') {
+                setRecipeState((state) => ({ ...state, isPicUploading: false }));
                 message.error(`${info.file.name} file upload failed.`);
             }
         },

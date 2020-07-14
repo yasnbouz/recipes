@@ -29,6 +29,7 @@ const StyledRecipe = styled(Col)`
                 padding:${theme['padding_sm']};
                 h3{
                     margin:0 0 1em;
+                    cursor:pointer;
                 }
             }
         }
@@ -44,14 +45,17 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
     return (
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <div className="card">
-                <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`} passHref>
+                <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
-                    <h3>
-                        <EllipsisText text={title} length={28} />
-                        <LikeButton recipeId={id} userLikes={userLikes} />
-                    </h3>
+                    <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
+                        <h3>
+                            <EllipsisText text={title} length={28} />
+                            <LikeButton recipeId={id} userLikes={userLikes} />
+                        </h3>
+                    </Link>
+
                     <p>
                         <EllipsisText text={description} length={110} />
                     </p>
