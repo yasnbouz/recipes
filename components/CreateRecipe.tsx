@@ -13,8 +13,11 @@ export default function CreateRecipe() {
     const owner = _get(user, 'sub') || '';
 
     const [createRecipeMutation, { loading }] = useCreateRecipeGraphQlMutation();
-    const onFinish = (values) => {
-        createRecipeMutation({ variables: { data: { ...values, owner } }, refetchQueries: [{ query: RecipesGraphQlDocument }] });
+    const onFinish = async (values) => {
+        await createRecipeMutation({
+            variables: { data: { ...values, owner } },
+            refetchQueries: [{ query: RecipesGraphQlDocument }, { query: RecipesGraphQlDocument, variables: { where: { owner } } }],
+        });
     };
     const {
         initialValues,
@@ -34,7 +37,7 @@ export default function CreateRecipe() {
             description: '',
             content: '',
             ingredients: [],
-            status_: '',
+            status_: 'DRAFT',
             images: {},
         },
         onFinish,

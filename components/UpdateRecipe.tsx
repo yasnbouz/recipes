@@ -6,7 +6,7 @@ import {
     useDeleteAssetGraphQlMutation,
 } from 'generated/apollo-components';
 import { useSubmitForm } from 'utils/submitForm';
-import { Form, Row, Col, Button } from 'antd';
+import { Form, Row, Col, Button, Space } from 'antd';
 import _get from 'lodash/get';
 import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
@@ -16,6 +16,7 @@ import PictureUploader from './PictureUploader';
 import Loading from './notify/Loading';
 import { createUpdateObj } from 'utils/createUpdateObj';
 import GraphImg from 'graphcms-image';
+import DeleteButton from './DeleteButton';
 
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
@@ -109,10 +110,13 @@ export default function UpdateRecipe({ id }: { id: string }) {
                     statusList={statusList}
                 />
                 <Col span={12} offset={6}>
-                    <Form.Item label="Update Recipe">
-                        <Button disabled={disabled} type="primary" htmlType="submit">
-                            Update Recipe
-                        </Button>
+                    <Form.Item label="Action">
+                        <Space size={4}>
+                            <Button disabled={disabled} type="primary" htmlType="submit">
+                                Update Recipe
+                            </Button>
+                            <DeleteButton recipeID={id} imageID={_get(data, 'recipe.images[0].id')} disabled={disabled} />
+                        </Space>
                     </Form.Item>
                 </Col>
             </Row>
