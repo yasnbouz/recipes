@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { GraphQLClient } from 'graphql-request';
+import { verifyNotABannedMutation } from 'utils/verify';
 
 const graphqlEndpoint = process.env.GRAPHCMS_PROJECT_API;
 export const graphqlClient = new GraphQLClient(graphqlEndpoint, {
@@ -11,6 +12,7 @@ export const graphqlClient = new GraphQLClient(graphqlEndpoint, {
 async function proxyGraphql(req: NextApiRequest, res: NextApiResponse) {
     try {
         const { variables, query } = req.body;
+        await verifyNotABannedMutation(req, res);
         const data = await graphqlClient.rawRequest(query, variables);
         res.json(data);
     } catch (e) {
