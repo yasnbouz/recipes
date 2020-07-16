@@ -1,6 +1,6 @@
 import MainLayout from 'components/layout/MainLayout';
 import { RecipeList, queryEnum } from 'components/RecipeList';
-import { useFetchUser } from 'lib/user';
+import { useUser } from 'lib/user';
 import get from 'lodash/get';
 import { Col } from 'antd';
 import Title from 'antd/lib/typography/Title';
@@ -9,7 +9,7 @@ import Loading from 'components/notify/Loading';
 import Router from 'next/router';
 
 const Favorites = () => {
-    const { user, loading } = useFetchUser();
+    const { user, loading } = useUser();
     const owner = get(user, 'sub');
     const options = owner ? { variables: { where: { user: owner } } } : {};
     if (loading) return <Loading />;

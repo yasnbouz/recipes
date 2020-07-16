@@ -10,10 +10,10 @@ import isEmpty from 'lodash/isEmpty';
 import _filter from 'lodash/filter';
 import styled from 'styled-components';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
-import { useFetchUser } from 'lib/user';
+import { useUser } from 'lib/user';
 
 function LikeButton({ recipeId, userLikes }: { recipeId: string; userLikes: UserLike[] }) {
-    const { user } = useFetchUser();
+    const { user } = useUser();
     const owner = get(user, 'sub');
     const userLike = _filter(userLikes, { user: owner });
     const hasUserLike = userLike.length > 0 ? true : false;

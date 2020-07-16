@@ -1,9 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 declare global {
     interface Window {
         __user: any;
     }
 }
+type User = {
+    user: any;
+    loading: boolean;
+};
+export const UserContext = createContext<Partial<User>>({});
+
 export async function fetchUser(cookie = '') {
     if (typeof window !== 'undefined' && window.__user) {
         return window.__user;
@@ -67,5 +73,10 @@ export function useFetchUser({ required }: { required? } = {}) {
         };
     }, []);
 
+    return { user, loading };
+}
+
+export function useUser() {
+    const { user, loading } = useContext(UserContext);
     return { user, loading };
 }

@@ -1,6 +1,6 @@
 import _get from 'lodash/get';
 import CreateRecipeForm from './CreateRecipeForm';
-import { useFetchUser } from 'lib/user';
+import { useUser } from 'lib/user';
 import Loading from './notify/Loading';
 import Router from 'next/router';
 import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generated/apollo-components';
@@ -9,7 +9,7 @@ import { Form } from 'antd';
 
 export default function CreateRecipe() {
     const [form] = Form.useForm();
-    const { user, loading: isFetchingUser } = useFetchUser();
+    const { user, loading: isFetchingUser } = useUser();
     const owner = _get(user, 'sub') || '';
 
     const [createRecipeMutation, { loading }] = useCreateRecipeGraphQlMutation();

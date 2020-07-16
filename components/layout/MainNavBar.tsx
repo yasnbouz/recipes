@@ -2,7 +2,7 @@ import { Layout, Menu } from 'antd';
 const { Header } = Layout;
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useFetchUser } from 'lib/user';
+import { useUser } from 'lib/user';
 
 const StyledHeader = styled(Header)`
     ${({ theme }) => `
@@ -46,7 +46,7 @@ const StyledBrand = styled.div`
     }
 `;
 export default function MainNavBar() {
-    const { user, loading } = useFetchUser();
+    const { user, loading } = useUser();
 
     return (
         <StyledHeader>

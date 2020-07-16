@@ -1,6 +1,6 @@
 import MainLayout from 'components/layout/MainLayout';
 import { RecipeList, queryEnum } from 'components/RecipeList';
-import { useFetchUser } from 'lib/user';
+import { useUser } from 'lib/user';
 import { get } from 'lodash';
 import { Row, Col, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
@@ -10,7 +10,7 @@ import Loading from 'components/notify/Loading';
 import Link from 'next/link';
 
 const MyRecipes = () => {
-    const { user, loading } = useFetchUser();
+    const { user, loading } = useUser();
     const owner = get(user, 'sub');
     const options = owner ? { variables: { where: { owner } } } : {};
     if (loading) return <Loading />;
