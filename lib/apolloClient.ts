@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
 
 let apolloClient;
 
@@ -10,21 +9,11 @@ const httpLink = createHttpLink({
     uri: process.env.NEXT_PUBLIC_BACKEND_URL, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
-const authLink = setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
-    // const token = localStorage.getItem('token');
-    // return the headers to the context so httpLink can read them
-    return {
-        // headers: {
-        //     ...headers,
-        //     authorization: token ? `Bearer ${token}` : '',
-        // },
-    };
-});
+
 function createApolloClient() {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
-        link: authLink.concat(httpLink),
+        link: httpLink,
         cache: new InMemoryCache(),
     });
 }

@@ -2,7 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { GraphQLClient } from 'graphql-request';
 
 const graphqlEndpoint = process.env.GRAPHCMS_PROJECT_API;
-export const graphqlClient = new GraphQLClient(graphqlEndpoint, {});
+export const graphqlClient = new GraphQLClient(graphqlEndpoint, {
+    headers: {
+        authorization: `Bearer ${process.env.GRAPHCMS_AUTH_TOKEN}`,
+    },
+});
 
 async function proxyGraphql(req: NextApiRequest, res: NextApiResponse) {
     try {
