@@ -6,9 +6,8 @@ import { setContext } from 'apollo-link-context';
 
 let apolloClient;
 
-const { NEXT_PUBLIC_GRAPHCMS_PROJECT_API } = process.env;
 const httpLink = createHttpLink({
-    uri: NEXT_PUBLIC_GRAPHCMS_PROJECT_API, // Server URL (must be absolute)
+    uri: process.env.NEXT_PUBLIC_BACKEND_URL, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 });
 const authLink = setContext((_, { headers }) => {

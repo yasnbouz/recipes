@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${NEXT_PUBLIC_GRAPHCMS_PROJECT_API}
+schema: ${GRAPHCMS_PROJECT_API}
 documents: 'graphql/**/*.ts'
 generates:
     generated/apollo-components.tsx:
