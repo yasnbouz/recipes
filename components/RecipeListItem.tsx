@@ -49,12 +49,12 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
-                    <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
-                        <h3>
+                    <h3>
+                        <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
                             <EllipsisText text={title} length={28} />
-                            <LikeButton recipeId={id} userLikes={userLikes} />
-                        </h3>
-                    </Link>
+                        </Link>
+                        <LikeButton recipeId={id} userLikes={userLikes} />
+                    </h3>
 
                     <p>
                         <EllipsisText text={description} length={110} />
