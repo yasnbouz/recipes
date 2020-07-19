@@ -17,10 +17,13 @@ import Loading from './notify/Loading';
 import { createUpdateObj } from 'utils/createUpdateObj';
 import GraphImg from 'graphcms-image';
 import DeleteButton from './DeleteButton';
+import { useUser } from 'lib/user';
+import Router from 'next/router';
 
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 export default function UpdateRecipe({ id }: { id: string }) {
+    const { user, loading: isFetchUser } = useUser();
     const { data, loading: isQueryLoading, error } = useRecipeGraphQlQuery({ variables: { where: { id } } });
     const [UpdateRecipeMutation, { loading: updateRecipeLoading }] = useUpdateRecipeGraphQlMutation();
     const [deleteAssetMutation, { loading: deleteAssetLoading }] = useDeleteAssetGraphQlMutation();
@@ -80,7 +83,13 @@ export default function UpdateRecipe({ id }: { id: string }) {
         });
         setRecipeState((state) => ({ ...state, isQueryLoading }));
     }
-    if (!data) return <Loading />;
+    if (!data || isFetchUser) return <Loading />;
+    const owner = _get(user, 'sub') || '';
+    const recipeOwner = _get(data, 'recipe.owner');
+    if (!user || owner !== recipeOwner) {
+        Router.push('/');
+    }
+
     const disabled = updateRecipeLoading || updateRecipeLoading || deleteAssetLoading || recipeState.isPicUploading;
     return (
         <Form layout="horizontal" name="update-recipe-form" form={form} onFinish={onUpdateFinish} initialValues={initialValues}>

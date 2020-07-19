@@ -18,6 +18,7 @@ export default function CreateRecipe() {
             variables: { data: { ...values, owner } },
             refetchQueries: [{ query: RecipesGraphQlDocument }, { query: RecipesGraphQlDocument, variables: { where: { owner } } }],
         });
+        Router.push('/my-recipes');
     };
     const {
         initialValues,
@@ -46,9 +47,7 @@ export default function CreateRecipe() {
     if (isFetchingUser) {
         return <Loading />;
     }
-    if (!user) {
-        Router.replace('/');
-    }
+
     return (
         <CreateRecipeForm
             form={form}

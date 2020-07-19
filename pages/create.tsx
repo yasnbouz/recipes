@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import { Col, Row } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import CreateRecipe from 'components/CreateRecipe';
+import { useUser } from 'lib/user';
+import Router from 'next/router';
+import Loading from 'components/notify/Loading';
 const Create = () => {
+    const { user, loading: isFetchingUser } = useUser();
+    if (isFetchingUser) return <Loading />;
+    if (!user) {
+        Router.replace('/');
+    }
     return (
         <MainLayout title="Create Recipe">
             <StyledRow>
