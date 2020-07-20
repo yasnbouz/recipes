@@ -1,7 +1,7 @@
 import MainLayout from 'components/layout/MainLayout';
 import { RecipeList, queryEnum } from 'components/RecipeList';
 import { initializeApollo } from 'lib/apolloClient';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { RecipesGraphQlDocument } from 'generated/apollo-components';
 const Home = () => {
     return (
@@ -11,14 +11,13 @@ const Home = () => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const apolloClient = initializeApollo();
     await apolloClient.query({ query: RecipesGraphQlDocument });
     return {
         props: {
             initialApolloState: apolloClient.cache.extract(),
         },
-        unstable_revalidate: 1,
     };
 };
 
