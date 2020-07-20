@@ -25,7 +25,6 @@ const MainHead = ({ title }: { title: string }) => (
         <meta name="title" content={title} />
         <meta name="description" content="A recipe discovery app powerd by Nextjs" />
         <meta name="keywords" content="React, Nextjs, typescript" />
-        <meta name="robots" content="index, follow" />
         <meta name="author" content="@yasnbouz" />
 
         {/* <!-- Open Graph / Facebook --> */}
