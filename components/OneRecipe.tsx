@@ -34,7 +34,7 @@ export default function OneRecipe({ recipe }) {
                 <Row>
                     <Col span={16} offset={4}>
                         <List
-                            header={<Title level={3}>Ingredients:</Title>}
+                            header={<Title level={2}>Ingredients:</Title>}
                             bordered
                             dataSource={ingredients || [{ type: 'None added', amount: 0, unit: '' }]}
                             renderItem={({ unit, amount, type }) => (
@@ -83,7 +83,7 @@ const StyledOneRecipe = styled(Col)`
         margin-bottom: 1rem;
     }
     .ant-typography.createdAt {
-        color: #f58230;
+        color: #000000b3;
     }
     .graphcms-image-wrapper {
         max-height: 600px;

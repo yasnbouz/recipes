@@ -34,6 +34,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/ban-types': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
+        '@typescript-eslint/no-var-requires': 'off',
     },
     settings: {
         react: {

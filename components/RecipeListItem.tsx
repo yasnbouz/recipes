@@ -21,13 +21,13 @@ const StyledRecipe = styled(Col)`
             .graphcms-image-outer-wrapper{
                 cursor:pointer;
                 .graphcms-image-wrapper{
-                    width:100%;
+                    max-width:100%;
                     height:200px;
                 }
             }
             .recipe-content{
                 padding:${theme['padding_sm']};
-                h3{
+                h2{
                     margin:0 0 1em;
                     cursor:pointer;
                 }
@@ -49,12 +49,12 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
-                    <h3>
+                    <h2>
                         <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
                             <EllipsisText text={title} length={28} />
                         </Link>
                         <LikeButton recipeId={id} userLikes={userLikes} />
-                    </h3>
+                    </h2>
 
                     <p>
                         <EllipsisText text={description} length={110} />

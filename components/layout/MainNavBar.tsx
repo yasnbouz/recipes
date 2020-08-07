@@ -34,7 +34,7 @@ const StyledBrand = styled.div`
     }
     .brand-name {
         ${({ theme }) => `
-        h2{
+        h1{
             text-align: left;
             font-size:${theme['font_size_lg']};
         }
@@ -53,7 +53,7 @@ export default function MainNavBar() {
             <StyledBrand>
                 <img className="logo" src="/logo.svg" alt="recipe brand" />
                 <div className="brand-name">
-                    <h2>The Next Chop</h2>
+                    <h1>The Next Chop</h1>
                     <p>A recipe discovery app powered by Next.js</p>
                 </div>
             </StyledBrand>

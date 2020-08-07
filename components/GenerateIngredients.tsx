@@ -33,7 +33,14 @@ export const GenerateIngredients = ({
                         <Button>{record[name]}</Button>
                     </Dropdown>
                 ) : (
-                    <Input placeholder={name} data-index={index} defaultValue={record[name]} name={name} onChange={handleInputChange} />
+                    <Input
+                        placeholder={name}
+                        aria-label={name}
+                        data-index={index}
+                        defaultValue={record[name]}
+                        name={name}
+                        onChange={handleInputChange}
+                    />
                 );
             },
         }))
@@ -63,15 +70,7 @@ export const GenerateIngredients = ({
                     </p>
                 </Col>
             </Row>
-            {values.length > 0 && (
-                <Row>
-                    <Col span={12} offset={6}>
-                        <Form.Item name="ingredients">
-                            <Table pagination={{ pageSize: 10 }} dataSource={values} columns={columns} />
-                        </Form.Item>
-                    </Col>
-                </Row>
-            )}
+            {}
         </>
     );
 };
