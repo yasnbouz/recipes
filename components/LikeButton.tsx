@@ -57,9 +57,9 @@ function LikeButton({ recipeId, userLikes }: { recipeId: string; userLikes: User
 const StyledSpan = styled.span`
     ${({ theme }) => `
         color: ${theme['heart_color']};
-        font-size: ${theme['font_size_xs']};
-        float: right;
+        font-size: ${theme['font_size_sm']};
         padding-left:3px;
+        flex: 0 0 auto;
     `}
 `;
 

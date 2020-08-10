@@ -12,11 +12,10 @@ const StyledRecipe = styled(Col)`
             overflow:hidden;
             border:1px solid ${theme.border_color};
             margin-bottom:${theme['margin_sm']};
-            height:340px;
             border-radius:5px;
             transition:box-shadow .3s ease;
             &:hover{
-                box-shadow:0px 0px 6px 4px rgba(0,0,0,0.1);
+                box-shadow:0px 10px 20px rgba(0,0,0,0.1);
             }
             .graphcms-image-outer-wrapper{
                 cursor:pointer;
@@ -27,6 +26,10 @@ const StyledRecipe = styled(Col)`
             }
             .recipe-content{
                 padding:${theme['padding_sm']};
+                & > div{
+                    display:flex;
+                    justify-content:space-between;
+                }
                 h2{
                     margin:0 0 1em;
                     cursor:pointer;
@@ -49,13 +52,14 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
                 <div className="recipe-content">
-                    <h2>
-                        <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
-                            <EllipsisText text={title} length={28} />
-                        </Link>
+                    <div>
+                        <h2>
+                            <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
+                                <EllipsisText text={title} length={35} />
+                            </Link>
+                        </h2>
                         <LikeButton recipeId={id} userLikes={userLikes} />
-                    </h2>
-
+                    </div>
                     <p>
                         <EllipsisText text={description} length={110} />
                     </p>
