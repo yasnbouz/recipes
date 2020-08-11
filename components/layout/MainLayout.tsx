@@ -20,33 +20,35 @@ const StyledBody = styled.div`
 const MainHead = ({ title }: { title: string }) => (
     <Head>
         {/* <!-- Primary Meta Tags --> */}
-        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="title" content={title} />
         <meta name="description" content="A recipe discovery app powerd by Nextjs" />
-        <meta name="keywords" content="React, Nextjs, typescript" />
+        <meta name="keywords" content="React, Nextjs, typescript, Graphql, GraphCMS" />
         <meta name="author" content="@yasnbouz" />
+        <title>{title}</title>
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://recipe-shop.com" />
+        <meta property="og:url" content="https://recipes.yasnbouzi.vercel.app/" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content="A recipe discovery app powerd by Nextjs" />
         <meta property="og:image" content="/logo.svg" />
 
         {/* <!-- Twitter --/> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://recipe-shop.com" />
+        <meta property="twitter:url" content="https://recipes.yasnbouzi.vercel.app/" />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content="A recipe discovery app powerd by Nextjs" />
         <meta property="twitter:image" content="/logo.svg" />
 
         {/* tab icon */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="icon" href="/favicon/favicon.ico" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link href="/icons/favicon.ico" rel="icon" type="image/x-icon" />
+        <link href="/icons/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16" />
+        <link href="/icons/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+        <link href="/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+        <link href="/manifest.json" rel="manifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
     </Head>

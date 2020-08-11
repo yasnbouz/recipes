@@ -1,6 +1,9 @@
-// eslint-disable-next-line
 module.exports = {
     root: true,
+    env: {
+        browser: true,
+        node: true,
+    },
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: { jsx: true },
