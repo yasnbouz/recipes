@@ -1,7 +1,7 @@
 import MainLayout from 'components/layout/MainLayout';
 import { RecipeList, queryEnum } from 'components/RecipeList';
 import { useUser } from 'lib/user';
-import { get } from 'lodash';
+import _get from 'lodash/get';
 import { Row, Col, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const MyRecipes = () => {
     const { user, loading } = useUser();
-    const owner = get(user, 'sub');
+    const owner = _get(user, 'sub');
     const options = owner ? { variables: { where: { owner } } } : {};
     if (loading) return <Loading />;
     if (!user) {

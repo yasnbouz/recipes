@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { get } from 'lodash';
+import _get from 'lodash/get';
 import { useRouter } from 'next/router';
 import { initializeApollo } from 'lib/apolloClient';
 import { RecipeGraphQlDocument, useRecipeGraphQlQuery } from 'generated/apollo-components';
@@ -13,7 +13,7 @@ export default function RecipePage() {
         query: { id },
     } = useRouter();
     const { data, loading, error } = useRecipeGraphQlQuery({ variables: { where: { id: `${id}` } } });
-    const title = get(data, 'recipe.title');
+    const title = _get(data, 'recipe.title');
     if (loading) return <Loading />;
     if (error)
         return (

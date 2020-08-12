@@ -1,6 +1,8 @@
 import { QueryHookOptions } from '@apollo/react-hooks';
 import { Recipe, useRecipesGraphQlQuery, useUserLikesGraphQlQuery } from 'generated/apollo-components';
-import { get, map, isEmpty } from 'lodash';
+import _get from 'lodash/get';
+import _map from 'lodash/map';
+import _isEmpty from 'lodash/isEmpty';
 import { Row } from 'antd';
 import Error from './notify/Error';
 import Loading from './notify/Loading';
@@ -21,8 +23,8 @@ type RecipeListProps = {
 
 export const RecipeList = ({ options, parentRoute, queryType }: RecipeListProps) => {
     const { data, loading, error } = queryType === queryEnum.recipes ? useRecipesGraphQlQuery(options) : useUserLikesGraphQlQuery(options);
-    const parentArray = get(data, queryType);
-    const recipesList = map(parentArray, (value) => get(value, 'recipe', value)).filter((o) => !isEmpty(o));
+    const parentArray = _get(data, queryType);
+    const recipesList = _map(parentArray, (value) => _get(value, 'recipe', value)).filter((o) => !_isEmpty(o));
     if (loading) return <Loading />;
     if (error || !recipesList) return <Error errorText={`${error}`} />;
     if (recipesList.length === 0) return <Warning warnHeader="No Recipes" warnText="No recipes are present, why not add one?" />;
