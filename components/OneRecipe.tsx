@@ -22,10 +22,10 @@ export default function OneRecipe({ recipe }) {
                 </Row>
                 <Row>
                     <Col span={20} offset={2}>
-                        <h1>
-                            {recipe.title}
+                        <div className="recipeTitle">
+                            <h1>{recipe.title}</h1>
                             <LikeButton recipeId={id} userLikes={userLikes} />
-                        </h1>
+                        </div>
                         <Paragraph className="createdAt">
                             <CalendarOutlined /> {recipeCreatedAt}
                         </Paragraph>
@@ -63,13 +63,22 @@ const StyledOneRecipe = styled(Col)`
         margin-top:${theme['margin_sm']};
         box-shadow: 0 0 4px ${theme['border_color']};
         border-radius: 8px;
-        h1{
-            font-size:${theme['font_size_xl']};
-            margin-top:${theme['margin_sm']};
-            @media (max-width:480px){
-                font-size:${theme['font_size_lg']};
+        .recipeTitle{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                font-size:${theme['font_size_xl']};
+                margin-top:${theme['margin_sm']};
+                @media (max-width:480px){
+                    font-size:${theme['font_size_lg']};
+                }
+        }
+            .gMgYCl {
+                font-size: ${theme['font_size_md']};
             }
         }
+      
         h2{
             font-size: ${theme['font_size_md']};
         }
