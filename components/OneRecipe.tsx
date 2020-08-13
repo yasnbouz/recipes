@@ -6,11 +6,12 @@ import { generateDate } from 'utils/generateDate';
 import ReactMarkdown from 'react-markdown';
 import { CalendarOutlined } from '@ant-design/icons';
 import LikeButton from './LikeButton';
+import { Recipe } from 'generated/apollo-components';
 const { Title, Text, Paragraph } = Typography;
 
 export default function OneRecipe({ recipe }) {
-    const { id, title, description, content, ingredients, images, userLikes, owner, createdAt } = recipe;
-    const recipeCreatedAt = generateDate(createdAt);
+    const { id, title, description, content, ingredients, images, userLikes, createdAt }: Recipe = recipe;
+    const recipeCreatedAt = generateDate(Date.parse(createdAt));
     return (
         <Row>
             <StyledOneRecipe sm={{ span: 20, offset: 2 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
