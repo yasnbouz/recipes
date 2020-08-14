@@ -1,21 +1,25 @@
-import MainLayout from 'components/layout/MainLayout';
-import { RecipeList, queryEnum } from 'components/RecipeList';
-import { useUser } from 'lib/user';
-import _get from 'lodash/get';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import styled from 'styled-components';
+
 import { Row, Col, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
-import styled from 'styled-components';
-import Router from 'next/router';
+import _get from 'lodash/get';
+
+import MainLayout from 'components/layout/MainLayout';
 import Loading from 'components/notify/Loading';
-import Link from 'next/link';
+import { RecipeList, queryEnum } from 'components/RecipeList';
+import { useUser } from 'lib/user';
 
 const MyRecipes = () => {
     const { user, loading } = useUser();
+    const router = useRouter();
     const owner = _get(user, 'sub');
     const options = owner ? { variables: { where: { owner } } } : {};
     if (loading) return <Loading />;
     if (!user) {
-        Router.replace('/');
+        router.replace('/');
     }
     return (
         <MainLayout title="My Recipes">

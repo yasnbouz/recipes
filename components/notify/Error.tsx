@@ -1,5 +1,7 @@
-import { Row, Col, Alert } from 'antd';
 import styled from 'styled-components';
+
+import { Row, Col, Alert } from 'antd';
+
 const StyledCol = styled(Col)`
     text-align: center;
     margin-top: 100px;

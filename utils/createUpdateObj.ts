@@ -1,6 +1,6 @@
-import _mapKeys from 'lodash/mapKeys';
 import _get from 'lodash/get';
 import _isEqual from 'lodash/isEqual';
+import _mapKeys from 'lodash/mapKeys';
 
 export function createUpdateObj(data, newObj) {
     const updateObj = {};

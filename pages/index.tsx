@@ -1,8 +1,10 @@
+import { GetServerSideProps } from 'next';
+
 import MainLayout from 'components/layout/MainLayout';
 import { RecipeList, queryEnum } from 'components/RecipeList';
-import { initializeApollo } from 'lib/apolloClient';
-import { GetServerSideProps } from 'next';
 import { RecipesGraphQlDocument } from 'generated/apollo-components';
+import { initializeApollo } from 'lib/apolloClient';
+
 const Home = () => {
     return (
         <MainLayout title="Recipes">

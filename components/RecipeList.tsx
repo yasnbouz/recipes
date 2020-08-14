@@ -1,14 +1,17 @@
+import styled from 'styled-components';
+
 import { QueryHookOptions } from '@apollo/react-hooks';
-import { Recipe, useRecipesGraphQlQuery, useUserLikesGraphQlQuery } from 'generated/apollo-components';
-import _get from 'lodash/get';
-import _map from 'lodash/map';
-import _isEmpty from 'lodash/isEmpty';
 import { Row } from 'antd';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
+import _map from 'lodash/map';
+
+import { Recipe, useRecipesGraphQlQuery, useUserLikesGraphQlQuery } from 'generated/apollo-components';
+
 import Error from './notify/Error';
 import Loading from './notify/Loading';
 import Warning from './notify/Warning';
 import RecipeListItem from './RecipeListItem';
-import styled from 'styled-components';
 
 export enum queryEnum {
     userLikes = 'userLikes',

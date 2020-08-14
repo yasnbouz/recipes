@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
+
 declare global {
     interface Window {
         __user: any;

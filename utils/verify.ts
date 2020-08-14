@@ -1,10 +1,12 @@
-import _isNil from 'lodash/isNil';
-import _get from 'lodash/get';
-import { getUserObject } from './getUserObject';
-import auth0 from 'lib/auth0';
 import { print } from 'graphql';
+import _get from 'lodash/get';
+import _isNil from 'lodash/isNil';
+
 import { RecipeGraphQlDocument, RecipesGraphQlDocument, UserLikeGraphQlDocument } from 'generated/apollo-components';
+import auth0 from 'lib/auth0';
 import { graphqlClient } from 'pages/api/graphql';
+
+import { getUserObject } from './getUserObject';
 
 export const verifyNotABannedMutation = async (req, res) => {
     const isBannedMutaion = req.body.query.match(/deleteMany|updateMany|upsert/g);

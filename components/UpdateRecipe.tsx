@@ -1,29 +1,33 @@
+import { useRouter } from 'next/router';
+
+import { Form, Row, Col, Button, Space } from 'antd';
+import GraphImg from 'graphcms-image';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
+import _isNil from 'lodash/isNil';
 import { useState } from 'react';
+
 import {
     useRecipeGraphQlQuery,
     useUpdateRecipeGraphQlMutation,
     RecipeGraphQlDocument,
     useDeleteAssetGraphQlMutation,
 } from 'generated/apollo-components';
+import { useUser } from 'lib/user';
+import { createUpdateObj } from 'utils/createUpdateObj';
 import { useSubmitForm } from 'utils/submitForm';
-import { Form, Row, Col, Button, Space } from 'antd';
-import _get from 'lodash/get';
-import _isNil from 'lodash/isNil';
-import _isEmpty from 'lodash/isEmpty';
+
+import DeleteButton from './DeleteButton';
 import { GenerateInput, GenerateTextInput, GenerateDropDown } from './GenerateFields';
 import { GenerateIngredients } from './GenerateIngredients';
-import PictureUploader from './PictureUploader';
 import Loading from './notify/Loading';
-import { createUpdateObj } from 'utils/createUpdateObj';
-import GraphImg from 'graphcms-image';
-import DeleteButton from './DeleteButton';
-import { useUser } from 'lib/user';
-import Router from 'next/router';
+import PictureUploader from './PictureUploader';
 
 const statusList = ['DRAFT', 'PUBLISHED', 'ARCHIVED'];
 
 export default function UpdateRecipe({ id }: { id: string }) {
     const { user, loading: isFetchUser } = useUser();
+    const router = useRouter();
     const { data, loading: isQueryLoading, error } = useRecipeGraphQlQuery({ variables: { where: { id } } });
     const [UpdateRecipeMutation, { loading: updateRecipeLoading }] = useUpdateRecipeGraphQlMutation();
     const [deleteAssetMutation, { loading: deleteAssetLoading }] = useDeleteAssetGraphQlMutation();
@@ -87,7 +91,7 @@ export default function UpdateRecipe({ id }: { id: string }) {
     const owner = _get(user, 'sub') || '';
     const recipeOwner = _get(data, 'recipe.owner');
     if (!user || owner !== recipeOwner) {
-        Router.push('/');
+        router.replace('/');
     }
 
     const disabled = updateRecipeLoading || updateRecipeLoading || deleteAssetLoading || recipeState.isPicUploading;

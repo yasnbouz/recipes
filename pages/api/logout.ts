@@ -1,5 +1,6 @@
-import auth0 from 'lib/auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import auth0 from 'lib/auth0';
 
 export default async function logout(req: NextApiRequest, res: NextApiResponse) {
     try {

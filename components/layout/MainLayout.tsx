@@ -1,12 +1,16 @@
-import { ReactNode } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'utils/theme';
-import GlobalStyle from 'utils/globalStyle';
 import Head from 'next/head';
+
+import styled, { ThemeProvider } from 'styled-components';
+
 import { Layout } from 'antd';
+import { ReactNode } from 'react';
+
+import GlobalStyle from 'utils/globalStyle';
+import { theme } from 'utils/theme';
+
 import MainFooter from './MainFooter';
-import styled from 'styled-components';
 import MainNavBar from './MainNavBar';
+
 const { Content } = Layout;
 type Props = {
     children: ReactNode;

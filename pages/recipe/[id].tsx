@@ -1,12 +1,14 @@
-import { GetServerSideProps } from 'next';
-import _get from 'lodash/get';
 import { useRouter } from 'next/router';
-import { initializeApollo } from 'lib/apolloClient';
-import { RecipeGraphQlDocument, useRecipeGraphQlQuery } from 'generated/apollo-components';
-import Loading from 'components/notify/Loading';
-import Error from 'components/notify/Error';
+
+import _get from 'lodash/get';
+import { GetServerSideProps } from 'next';
+
 import MainLayout from 'components/layout/MainLayout';
+import Error from 'components/notify/Error';
+import Loading from 'components/notify/Loading';
 import OneRecipe from 'components/OneRecipe';
+import { RecipeGraphQlDocument, useRecipeGraphQlQuery } from 'generated/apollo-components';
+import { initializeApollo } from 'lib/apolloClient';
 
 export default function RecipePage() {
     const {

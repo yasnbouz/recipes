@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { GraphQLClient } from 'graphql-request';
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import { verifyNotABannedMutation, verifyUserMatches, verifyUserPermission } from 'utils/verify';
 
 const graphqlEndpoint = process.env.GRAPHCMS_PROJECT_API;

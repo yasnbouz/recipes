@@ -1,8 +1,12 @@
-import { Layout, Menu } from 'antd';
 import Link from 'next/link';
+
 import styled from 'styled-components';
-import { useUser } from 'lib/user';
+
 import { AlignRightOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+
+import { useUser } from 'lib/user';
+
 const { Header } = Layout;
 
 const StyledHeader = styled(Header)`

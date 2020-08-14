@@ -1,4 +1,5 @@
 import { Form, Input, Dropdown, Button, Row, Col } from 'antd';
+
 import MenuList from './MenuList';
 
 export const GenerateInput = ({ name }: { name: string }) => (

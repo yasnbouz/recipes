@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+
 const heading = (size) => `
     text-align:center;
     font-weight:bold;

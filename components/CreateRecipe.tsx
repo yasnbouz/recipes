@@ -1,15 +1,20 @@
-import _get from 'lodash/get';
-import CreateRecipeForm from './CreateRecipeForm';
-import { useUser } from 'lib/user';
-import Loading from './notify/Loading';
-import Router from 'next/router';
-import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generated/apollo-components';
-import { useSubmitForm } from 'utils/submitForm';
+import { useRouter } from 'next/router';
+
 import { Form } from 'antd';
+import _get from 'lodash/get';
+
+import { useCreateRecipeGraphQlMutation, RecipesGraphQlDocument } from 'generated/apollo-components';
+import { useUser } from 'lib/user';
+import { useSubmitForm } from 'utils/submitForm';
+
+import CreateRecipeForm from './CreateRecipeForm';
+import Loading from './notify/Loading';
 
 export default function CreateRecipe() {
     const [form] = Form.useForm();
     const { user, loading: isFetchingUser } = useUser();
+    const router = useRouter();
+
     const owner = _get(user, 'sub') || '';
 
     const [createRecipeMutation, { loading }] = useCreateRecipeGraphQlMutation();
@@ -18,7 +23,7 @@ export default function CreateRecipe() {
             variables: { data: { ...values, owner } },
             refetchQueries: [{ query: RecipesGraphQlDocument }, { query: RecipesGraphQlDocument, variables: { where: { owner } } }],
         });
-        Router.push('/my-recipes');
+        router.push('/my-recipes');
     };
     const {
         initialValues,

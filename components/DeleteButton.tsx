@@ -1,7 +1,10 @@
-import { Button, Modal } from 'antd';
+import { useRouter } from 'next/router';
+
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useDeleteRecipeGraphQlMutation, useDeleteAssetGraphQlMutation, RecipeGraphQlDocument } from 'generated/apollo-components';
-import Router from 'next/router';
+import { Button, Modal } from 'antd';
+
+import { useDeleteRecipeGraphQlMutation, useDeleteAssetGraphQlMutation } from 'generated/apollo-components';
+
 const { confirm } = Modal;
 type DeleteButtonProps = {
     recipeID: string;
@@ -11,6 +14,7 @@ type DeleteButtonProps = {
 export default function DeleteButton({ recipeID, imageID, disabled }: DeleteButtonProps) {
     const [deleteRecipeMutation, { loading: deleteRecipeLoading }] = useDeleteRecipeGraphQlMutation();
     const [deleteAssetMutation, { loading: deleteAssetLoading }] = useDeleteAssetGraphQlMutation();
+    const router = useRouter();
     const showDeleteConfirm = () => {
         confirm({
             title: 'Confirm Delete',
@@ -25,7 +29,7 @@ export default function DeleteButton({ recipeID, imageID, disabled }: DeleteButt
                     await deleteRecipeMutation({
                         variables: { where: { id: recipeID } },
                     });
-                Router.replace('/my-recipes');
+                router.replace('/my-recipes');
             },
         });
     };

@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import _sortBy from 'lodash/sortBy';
 import _filter from 'lodash/filter';
+import _sortBy from 'lodash/sortBy';
+import { useState } from 'react';
 
 export const useSubmitForm = (form, initialValues, callback) => {
     const [ingredients, setIngredients] = useState(initialValues.ingredients);

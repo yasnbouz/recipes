@@ -1,10 +1,15 @@
 import Link from 'next/link';
+
+import styled from 'styled-components';
+
+import { Col } from 'antd';
 import GraphImg from 'graphcms-image';
 import EllipsisText from 'react-ellipsis-text';
+
 import { Recipe } from 'generated/apollo-components';
-import { Col } from 'antd';
-import styled from 'styled-components';
+
 import LikeButton from './LikeButton';
+
 const StyledRecipe = styled(Col)`
     ${({ theme }) => `
         padding:0 ${theme['padding_sm']} !important;

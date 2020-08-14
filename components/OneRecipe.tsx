@@ -1,12 +1,16 @@
+import styled from 'styled-components';
+
+import { CalendarOutlined } from '@ant-design/icons';
 import { Col, Row, Typography, List } from 'antd';
 import GraphImg from 'graphcms-image';
-import styled from 'styled-components';
-import { generateUnit } from 'utils/generateUnit';
-import { generateDate } from 'utils/generateDate';
 import ReactMarkdown from 'react-markdown';
-import { CalendarOutlined } from '@ant-design/icons';
-import LikeButton from './LikeButton';
+
 import { Recipe } from 'generated/apollo-components';
+import { generateDate } from 'utils/generateDate';
+import { generateUnit } from 'utils/generateUnit';
+
+import LikeButton from './LikeButton';
+
 const { Title, Text, Paragraph } = Typography;
 
 export default function OneRecipe({ recipe }) {

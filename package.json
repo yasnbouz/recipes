@@ -9,14 +9,14 @@
         "generate": "graphql-codegen -r dotenv/config -c codegen.yml dotenv_config_path=./.env.local",
         "format": "prettier --write ./**/*.{js,jsx,ts,tsx,yml}",
         "lint": "eslint ./**/*.{js,jsx,ts,tsx}",
-        "lint:fix": "yarn lint -- --fix",
+        "lint:fix": "yarn lint --fix",
         "storybook": "start-storybook -s ./public -p 6006",
         "build-storybook": "build-storybook"
     },
     "lint-staged": {
         "*.{html,md,mdx,ts,tsx,js,jsx,json}": [
-            "yarn lint:fix",
-            "yarn format"
+            "yarn format",
+            "yarn lint:fix"
         ]
     },
     "husky": {
@@ -72,6 +72,7 @@
         "babel-plugin-styled-components": "^1.10.7",
         "eslint": "^7.2.0",
         "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-import": "^2.22.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-react": "^7.20.0",

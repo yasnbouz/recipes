@@ -1,6 +1,6 @@
-import { Spin } from 'antd';
-
 import styled from 'styled-components';
+
+import { Spin } from 'antd';
 
 const StyledSpinner = styled.div`
     position: fixed;

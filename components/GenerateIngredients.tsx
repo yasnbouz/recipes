@@ -1,5 +1,5 @@
-import { Row, Col, Button, Table, Input, Dropdown } from 'antd';
-import { Form } from 'antd';
+import { Row, Col, Button, Table, Input, Dropdown, Form } from 'antd';
+
 import MenuList from './MenuList';
 
 type IngredientsProps = {
@@ -70,7 +70,15 @@ export const GenerateIngredients = ({
                     </p>
                 </Col>
             </Row>
-            {}
+            {values.length > 0 && (
+                <Row>
+                    <Col span={12} offset={6}>
+                        <Form.Item name="ingredients">
+                            <Table pagination={{ pageSize: 10 }} dataSource={values} columns={columns} />
+                        </Form.Item>
+                    </Col>
+                </Row>
+            )}
         </>
     );
 };
