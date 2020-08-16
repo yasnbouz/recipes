@@ -48,12 +48,12 @@ module.exports = {
                 groups: ['builtin', 'external', 'internal'],
                 pathGroups: [
                     {
-                        pattern: 'next/**',
+                        pattern: 'react',
                         group: 'external',
                         position: 'before',
                     },
                     {
-                        pattern: 'styled-components',
+                        pattern: 'next/**',
                         group: 'external',
                         position: 'before',
                     },

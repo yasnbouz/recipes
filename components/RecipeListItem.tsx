@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-import styled from 'styled-components';
-
 import { Col } from 'antd';
+import { motion } from 'framer-motion';
 import GraphImg from 'graphcms-image';
 import EllipsisText from 'react-ellipsis-text';
+import styled from 'styled-components';
 
 import { Recipe } from 'generated/apollo-components';
 
@@ -47,12 +47,18 @@ type RecipeListItemProps = {
     recipe: Recipe;
     parentRoute: string;
 };
+const stagger = {
+    initial: { opacity: 0 },
+    animate: {
+        opacity: 1,
+    },
+};
 export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemProps) {
     const { title, description, images, id, userLikes } = recipe;
 
     return (
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <div className="card">
+            <motion.div className="card" variants={stagger} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                 <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
@@ -69,7 +75,7 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
                         <EllipsisText text={description} length={110} />
                     </p>
                 </div>
-            </div>
+            </motion.div>
         </StyledRecipe>
     );
 }
