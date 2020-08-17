@@ -1,7 +1,8 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { UploadOutlined } from '@ant-design/icons';
 import { Upload, Button, message } from 'antd';
 import _get from 'lodash/get';
-import { Dispatch, SetStateAction } from 'react';
 
 export default function PictureUploader({
     handleSubmitImages,

@@ -1,9 +1,9 @@
+import { ReactNode } from 'react';
+
 import Head from 'next/head';
 
-import styled, { ThemeProvider } from 'styled-components';
-
 import { Layout } from 'antd';
-import { ReactNode } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from 'utils/globalStyle';
 import { theme } from 'utils/theme';

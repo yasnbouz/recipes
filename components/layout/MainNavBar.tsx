@@ -1,9 +1,8 @@
 import Link from 'next/link';
 
-import styled from 'styled-components';
-
 import { AlignRightOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+import styled from 'styled-components';
 
 import { useUser } from 'lib/user';
 

@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import { Form, Button, Row, Col } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { useState } from 'react';
 
 import { GenerateInput, GenerateTextInput, GenerateDropDown } from './GenerateFields';
 import { GenerateIngredients } from './GenerateIngredients';

@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import styled from 'styled-components';
-
 import { Row, Col, Button } from 'antd';
 import Title from 'antd/lib/typography/Title';
 import _get from 'lodash/get';
+import styled from 'styled-components';
 
 import MainLayout from 'components/layout/MainLayout';
 import Loading from 'components/notify/Loading';

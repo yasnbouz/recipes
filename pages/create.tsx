@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 
-import styled from 'styled-components';
-
 import { Col, Row } from 'antd';
 import Title from 'antd/lib/typography/Title';
+import styled from 'styled-components';
 
 import CreateRecipe from 'components/CreateRecipe';
 import MainLayout from 'components/layout/MainLayout';
