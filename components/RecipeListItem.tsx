@@ -58,7 +58,7 @@ export default function RecipeListItem({ recipe, parentRoute }: RecipeListItemPr
 
     return (
         <StyledRecipe xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <motion.div className="card" variants={stagger} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <motion.div className="card" variants={stagger} whileHover={{ scale: 1.1 }}>
                 <Link href={`/${parentRoute}/[id]`} as={`/${parentRoute}/${recipe.id}`}>
                     <div>{images ? <GraphImg image={images[0] || {}} alt={title} /> : null}</div>
                 </Link>
